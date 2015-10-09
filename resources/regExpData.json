@@ -1,0 +1,7 @@
+[
+  {
+    "description": "should contain Password regexp validation|SignUp page",
+    "passed": true,
+    "os": "WINDOWS"
+  }
+]
