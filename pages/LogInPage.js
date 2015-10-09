@@ -7,7 +7,7 @@ var LogInPage = function() {
     var logInButton = element(by.xpath('//div[5]/div/input'));
     var validationMessage = element(by.xpath('//div[1]/div/p'));
 
-    this.navigateToLoginPage = function() {
+    this.openLoginPage = function() {
         browser.get('/login');
     };
 

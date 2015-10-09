@@ -4,7 +4,7 @@
 var AlphaflowHomepage = function() {
     var signInLink = element(by.xpath('//li[5]/a'));
 
-    this.get = function() {
+    this.openHomepage = function() {
         browser.get('/');
     };
 

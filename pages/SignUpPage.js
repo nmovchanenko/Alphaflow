@@ -9,7 +9,7 @@ var SignUpPage = function() {
 
     var logInButton = element(by.xpath('//div[5]/div/input'));
 
-    this.navigateToSignUpPage = function() {
+    this.openSignUpPage = function() {
         browser.get('/signup');
     };
 

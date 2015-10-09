@@ -44,8 +44,6 @@ exports.config = {
 
     specs: ['tests/*.js'],
 
-    //params: require('resources/regExpData.json'),
-
     baseUrl: 'http://qa.alphaflow.com',
 
     capabilities: {
