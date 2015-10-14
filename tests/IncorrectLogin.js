@@ -1,6 +1,3 @@
-/**
- * Created by mikalai.mauchanenka on 08.10.2015.
- */
 var LogInPage = require('../pages/LogInPage.js');
 var userData = require('../resources/users.json');
 

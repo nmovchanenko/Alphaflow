@@ -1,6 +1,3 @@
-/**
- * Created by mikalai.mauchanenka on 08.10.2015.
- */
 var LogInPage = function() {
     var emailTextField = element(by.id('afEmail'));
     var passwordTextField = element(by.id('afPassword'));

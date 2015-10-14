@@ -1,9 +1,7 @@
-/**
- * Created by mikalai.mauchanenka on 08.10.2015.
- */
 var SignUpPage = function() {
     var emailTextBox = element(by.id('afSignupEmail'));
-    var passwordTextBox = element(by.xpath('//form/div[2]/div/input'));
+    var repeatEmailTextBox = element(by.id('afRepeatSignupEmail'));
+    var passwordTextBox = element(by.id('afSignupPassword'));
     var firstNameTextBox = element(by.id('afSignupFirstName'));
     var lastNameTextBox = element(by.id('afSignupLastName'));
 
@@ -19,6 +17,10 @@ var SignUpPage = function() {
 
     this.txbEmail = function () {
         return emailTextBox;
+    };
+
+    this.txbRepeatEmail = function () {
+        return repeatEmailTextBox;
     };
 
     this.txbFirstName = function () {

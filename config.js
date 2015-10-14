@@ -1,6 +1,3 @@
-/**
- * Created by mikalai.mauchanenka on 08.10.2015.
- */
 /*
  For using HtmlReporter install 'protractor-html-screenshot-reporter' module in project folder:
  npm install protractor-html-screenshot-reporter
@@ -9,8 +6,8 @@
 var HtmlReporter = require('protractor-html-screenshot-reporter');
 var path = require('path');
 var reporter = new HtmlReporter({
-    baseDirectory: 'screenshots',
-     //takeScreenShotsOnlyForFailedSpecs: true,
+    baseDirectory: 'report/screenshots',
+    takeScreenShotsOnlyForFailedSpecs: true,
     takeScreenShotsForSkippedSpecs: true,
     pathBuilder: function pathBuilder(spec, descriptions, results, capabilities) {
 
@@ -40,18 +37,27 @@ var reporter = new HtmlReporter({
 });
 
 exports.config = {
-    //seleniumAddress: 'http://localhost:4444/wd/hub',
+    //seleniumAddress: 'http://192.168.88.128:4444/wd/hub',
 
     specs: ['tests/*.js'],
+    //specs: ['tests/TestDBConnection.js'],
+    //specs: ['tests/SignUpTextFieldsValidation.js'],
+    //specs: ['tests/IncorrectLogin.js'],
 
     baseUrl: 'http://qa.alphaflow.com',
 
     capabilities: {
-        'browserName': 'firefox'
+        'browserName': 'chrome',
+        'chromeOptions': {
+            'args': ['disable-extensions', 'start-maximized', 'enable-crash-reporter-for-testing']
+        },
+        'loggingPrefs': {
+            'browser': 'ALL'
+        }
     },
 
     onPrepare: function() {
-        browser.driver.manage().window().setSize(1920, 1080);
+        //browser.driver.manage().window().setSize(1920, 1080);
         // Add a screenshot reporter:
         jasmine.getEnv().addReporter(reporter);
     },
