@@ -8,11 +8,11 @@ var LogInPage = function() {
         browser.get('/login');
     };
 
-    this.setEmail = function(email) {
+    this.typeEmail = function(email) {
         emailTextField.sendKeys(email);
     };
 
-    this.setPassword = function(password) {
+    this.typePassword = function(password) {
         passwordTextField.sendKeys(password);
     };
 
