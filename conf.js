@@ -1,6 +1,3 @@
-/**
- * Created by mikalai.mauchanenka on 14.10.2015.
- */
 /*
  For using HtmlReporter install 'protractor-html-screenshot-reporter' module in project folder:
  npm install protractor-html-screenshot-reporter
@@ -43,9 +40,6 @@ exports.config = {
     seleniumAddress: 'http://192.168.88.128:4444/wd/hub',
 
     specs: ['tests/*.js'],
-    //specs: ['tests/TestDBConnection.js'],
-    //specs: ['tests/SignUpTextFieldsValidation.js'],
-    //specs: ['tests/IncorrectLogin.js'],
 
     baseUrl: 'http://qa.alphaflow.com',
 
