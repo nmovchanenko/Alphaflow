@@ -46,7 +46,7 @@ afterEach(function () {
 
     // Flush browser console to file
     var logs = browser.driver.manage().logs(),
-    logType = 'browser'; // browser
+        logType = 'browser'; // browser
     logs.getAvailableLogTypes().then(function (logTypes) {
         if (logTypes.indexOf(logType) > -1) {
             var logFileName = path.resolve(consoleLogsDir + '/' + baseFileName + '.txt');

@@ -50,7 +50,7 @@ exports.config = {
     baseUrl: 'http://qa.alphaflow.com',
 
     capabilities: {
-        'browserName': 'firefox',
+        'browserName': 'chrome',
         'chromeOptions': {
             'args': ['disable-extensions', 'start-maximized', 'enable-crash-reporter-for-testing']
         },
