@@ -2,7 +2,6 @@
  For using HtmlReporter install 'protractor-html-screenshot-reporter' module in project folder:
  npm install protractor-html-screenshot-reporter
  */
-
 var HtmlReporter = require('protractor-html-screenshot-reporter');
 var path = require('path');
 var reporter = new HtmlReporter({
