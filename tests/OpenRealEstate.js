@@ -3,6 +3,7 @@ var profiles = require('../resources/profiles.json');
 
 var BaseOperations = require('../common/BaseOperations.js');
 var Sidebar = require('../forms/Sidebar.js');
+var RealEstatePage = require('../pages/RealEstatePage.js');
 
 describe('Real Estate - Investment Dashboard', function() {
     var base = new BaseOperations();
@@ -14,8 +15,9 @@ describe('Real Estate - Investment Dashboard', function() {
     });
 
     it('should display investment table', function() {
-        sidebar.openRealEstate();
-        //expect(logInPage.getValidationMessage()).toEqual('Invalid email or password was passed.');
+        base.openRealEstate();
+
+        var realEstate = new RealEstatePage();
+        expect(realEstate.getRealEstatePageHeader()).toEqual('Real Estate - Investment Dashboard');
     });
 });
-

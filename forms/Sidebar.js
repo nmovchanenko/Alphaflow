@@ -1,3 +1,12 @@
+/**
+ *  This script describes a sidebar on the dashboard page.
+ *  Sidebar contains:
+ *   - profile picture and name;
+ *   - dashboard menu;
+ *   - cashflows link;
+ *   - platforms link;
+ *   - admin menu.
+ */
 var Sidebar = function() {
     var profileName = element(by.xpath('//strong[@class=\'font-bold ng-binding\']'));
     var realEstate = element(by.xpath('//a[contains(text(),\'Real Estate\')]'));
@@ -7,10 +16,12 @@ var Sidebar = function() {
         return profileName.getText();
     };
 
-    this.openRealEstate = function () {
-        dashboardLink.click();
-        realEstate.click();
+    this.lnkRealEstate = function() {
+        return realEstate;
     };
 
+    this.lnkDashboard = function() {
+        return dashboardLink;
+    };
 };
 module.exports = Sidebar;

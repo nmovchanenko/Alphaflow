@@ -1,3 +1,7 @@
+/**
+ *  Navigation bar describes links on the top of the home page.
+ *  It includes: Home, How it Works, About us, FAQ, Sign in
+ **/
 var NavigationBar = function() {
 
     this.lnkHome = function () {
