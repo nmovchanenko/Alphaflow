@@ -4,8 +4,7 @@ var SignUpPage = function() {
     var passwordTextBox = element(by.id('afSignupPassword'));
     var firstNameTextBox = element(by.id('afSignupFirstName'));
     var lastNameTextBox = element(by.id('afSignupLastName'));
-
-    var logInButton = element(by.xpath('//div[5]/div/input'));
+    var logInButton = element(by.id('afLoginFormSubmit'));
 
     this.openSignUpPage = function() {
         browser.get('/signup');

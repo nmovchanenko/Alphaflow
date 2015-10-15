@@ -10,7 +10,9 @@
 var Sidebar = function() {
     var profileName = element(by.xpath('//strong[@class=\'font-bold ng-binding\']'));
     var realEstate = element(by.xpath('//a[contains(text(),\'Real Estate\')]'));
-    var dashboardLink = element(by.xpath('//ul[@id=\'side-menu\']/li[2]/a'));
+    var dashboardMenu = element(by.xpath('//ul[@id=\'side-menu\']/li[2]/a'));
+    var adminMenu = element(by.xpath('//ul[@id=\'side-menu\']/li[5]/a'));
+    var usersLink = element(by.xpath('//a[contains(text(),\'Users\')]'));
 
     this.getProfileName = function() {
         return profileName.getText();
@@ -20,8 +22,16 @@ var Sidebar = function() {
         return realEstate;
     };
 
-    this.lnkDashboard = function() {
-        return dashboardLink;
+    this.dashboardMenu = function() {
+        return dashboardMenu;
+    };
+
+    this.adminMenu = function() {
+        return adminMenu;
+    };
+
+    this.lnkUsers = function() {
+        return usersLink;
     };
 };
 module.exports = Sidebar;
