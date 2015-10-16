@@ -5,6 +5,7 @@ var LogInPage = require('../pages/LogInPage.js');
 var Sidebar = require('../forms/Sidebar.js');
 
 var BaseOperations = function() {
+    var condition = protractor.ExpectedConditions;
     var logInPage = new LogInPage();
     var sidebar = new Sidebar();
 
@@ -31,9 +32,7 @@ var BaseOperations = function() {
             sidebar.lnkRealEstate().click();
         }
         // this will wait Real Estate page to be loaded
-        browser.driver.wait(function() {
-            return browser.driver.isElementPresent(by.xpath('//h2[contains(text(),\'Real Estate - Investment Dashboard\')]'));
-        });
+        browser.wait(condition.visibilityOf(element(by.xpath('//h2[contains(text(),\'Real Estate - Investment Dashboard\')]'))), 15000);
     };
 
     /**
@@ -47,27 +46,24 @@ var BaseOperations = function() {
     };
 
     /**
-     * Temp hack to open Bogdan Cirlig real estate page with investment data
+     * Temporary hack to open Bogdan Cirlig real estate page with investment data
      * @param email
      * @param password
      */
     this.openBogdanRealEstate = function (email, password) {
-        var EC = protractor.ExpectedConditions;
-
         this.loginAs(email, password);
         sidebar.lnkUsers().click();
-
-        browser.wait(EC.visibilityOf(element(by.xpath('//h2[contains(text(),\'User Administration\')]'))), 15000);
-
+        // wait for 'User Administration' page
+        browser.wait(condition.visibilityOf(element(by.xpath('//h2[contains(text(),\'User Administration\')]'))), 15000);
+        // click 'Impersonate user' button
         element(by.xpath('//div[@class=\'ui-grid-row ng-scope\'][1]//button')).click();
-
         // we have to wait until a new browsertab will be opened
         browser.sleep(5000);
-
+        // switch to the opened tab
         browser.getAllWindowHandles().then(function (handles) {
             browser.switchTo().window(handles[1]);
-            var loadLogin = element(by.xpath('//h2[contains(text(),\'Real Estate - Investment Dashboard\')]'));
-            browser.wait(EC.visibilityOf(loadLogin), 15000);
+            var bogdanRealEstatePage = element(by.xpath('//h2[contains(text(),\'Real Estate - Investment Dashboard\')]'));
+            browser.wait(condition.visibilityOf(bogdanRealEstatePage), 15000);
         });
     };
 

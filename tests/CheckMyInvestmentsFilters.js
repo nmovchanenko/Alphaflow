@@ -11,8 +11,11 @@ describe('Real Estate - Investment Dashboard', function() {
 
     it('should open Real Estate page', function() {
         base.openBogdanRealEstate(userData.validEmail, userData.validPass);
-
-
         expect(realEstate.getRealEstatePageHeader()).toEqual('Real Estate - Investment Dashboard');
+    });
+
+    it('filter by platform', function() {
+
+
     });
 });
