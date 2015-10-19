@@ -1,7 +1,7 @@
 var LogInPage = function() {
     var emailTextField = element(by.id('afEmail'));
     var passwordTextField = element(by.id('afPassword'));
-    var logInButton = element(by.xpath('//div[5]/div/input'));
+    var logInButton = element(by.id('afLoginFormSubmit'));
     var validationMessage = element(by.xpath('//div[1]/div/p'));
 
     this.openLoginPage = function() {

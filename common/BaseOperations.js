@@ -56,7 +56,7 @@ var BaseOperations = function() {
         // wait for 'User Administration' page
         browser.wait(condition.visibilityOf(element(by.xpath('//h2[contains(text(),\'User Administration\')]'))), 15000);
         // click 'Impersonate user' button
-        element(by.xpath('//div[@class=\'ui-grid-row ng-scope\'][1]//button')).click();
+        element(by.xpath('//div[contains(text(),\'Bogdan\')]/../preceding-sibling::div//button')).click();
         // we have to wait until a new browsertab will be opened
         browser.sleep(5000);
         // switch to the opened tab
@@ -67,5 +67,25 @@ var BaseOperations = function() {
         });
     };
 
+    /**
+     * Scroll page to coordinates
+     * @param x
+     * @param y
+     */
+    this.scrollPageTo = function(x, y) {
+        browser.executeScript('window.scrollTo(' + x + ',' + y + ');').then(function () {
+            browser.sleep(1000);
+        });
+    };
+
+    /**
+     * Zooms the page
+     * @param scale (e.g. 0.9)
+     */
+    this.setZoom = function(scale) {
+        browser.executeScript('document.body.style.transform=\'scale(' + scale + '%)\';').then(function () {
+            browser.sleep(3000);
+        });
+    };
 };
 module.exports = BaseOperations;

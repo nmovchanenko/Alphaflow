@@ -1,22 +1,35 @@
+var BaseOperations = require('../common/BaseOperations.js');
+var base = new BaseOperations();
+
 var RealEstatePage = function() {
     var realEstatePageHeader = element(by.xpath('//h2[contains(text(),\'Real Estate - Investment Dashboard\')]'));
-
-    // elements for active investments table
-    var activeEquity = element(by.id('//div[@class=\'col-lg-4\'][1]/div/div[2]/div[2]/div[1]/h2'));
-    var activeDebt = element(by.xpath('//div[@class=\'col-lg-4\'][1]/div/div[2]/div[2]/div[2]/h2'));
-
-    // elements for total investments table
-    var totalEquity = element(by.id('//div[@class=\'col-lg-4\'][2]/div/div[2]/div[2]/div[1]/h2'));
-    var totalDebt = element(by.xpath('//div[@class=\'col-lg-4\'][2]/div/div[2]/div[2]/div[2]/h2'));
-
+    /* My Investments table: */
+    var btnSelectItemsPerPage = element(by.xpath('//span[@class=\'k-select\']/span[@class=\'k-icon k-i-arrow-s\']'));
+    var itemsCounter = element(by.xpath('//span[@class=\'k-pager-info k-label\']'));
+    var lnkDisabledGoLastPage = element(by.xpath('//div[@class=\'k-pager-wrap k-grid-pager k-widget k-floatwrap\']/a[last()][@class=\'k-link k-pager-nav k-pager-last k-state-disabled\']'));
+    var lnkGoNextPage = element(by.xpath('//a[@title=\'Go to the next page\']/span'));
+    var nextPage = element(by.xpath('//a[@title=\'Go to the next page\']'));
     // filters
-    var btnPlatformList = element(by.xpath('//input[@class=\'k-input k-readonly\']'));
-
+    var btnPlatformList = element(by.xpath('//span[@data-field=\'platformName\']//div'));
     // element.all(by.xpath(‘//div[@title='Fundrise']’)).count()
+
+
 
     this.filterInvestmentsByPlatform = function(platform) {
         btnPlatformList.click();
         element(by.xpath('//li[contains(text(),\'' + platform + '\')]')).click();
+    };
+
+
+
+    this.hasNextPage = function() {
+        browser.executeScript("document.getElementsByClassName('k-pager-wrap k-grid-pager k-widget k-floatwrap')[0].scrollIntoView();");
+        return nextPage.getAttribute('class') == "k-link k-pager-nav";
+    };
+
+    this.clickNextPage = function () {
+        lnkGoNextPage.click();
+        console.log('clicked')
     };
 
     this.getRealEstatePageHeader = function() {
@@ -24,5 +37,4 @@ var RealEstatePage = function() {
     };
 
 };
-
 module.exports = RealEstatePage;
