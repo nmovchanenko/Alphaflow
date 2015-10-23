@@ -257,11 +257,11 @@ describe('Real Estate - Investment Dashboard', function() {
 
         // variable 'grid' contains rows, which are represented on the first page of Investment table
         var grid = $$('tbody[role=\'rowgroup\']>tr');
-        grid.each(function() {
-            // array index of 'dbData'
-            var index = 0;
-            var rowNumber = 1;
+        // array index of 'dbData'
+        var index = 0;
+        var rowNumber = 1;
 
+        grid.each(function() {
             describe('Investment table', function() {
                 it('check each row', function () {
                     // focus on the 'My Investments' table
