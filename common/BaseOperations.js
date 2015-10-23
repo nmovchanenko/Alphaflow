@@ -87,5 +87,8 @@ var BaseOperations = function() {
             browser.sleep(3000);
         });
     };
+
+    //TODO: clickAndWait()
+
 };
 module.exports = BaseOperations;

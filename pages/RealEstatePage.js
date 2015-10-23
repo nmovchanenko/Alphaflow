@@ -4,23 +4,70 @@ var base = new BaseOperations();
 var RealEstatePage = function() {
     var realEstatePageHeader = element(by.xpath('//h2[contains(text(),\'Real Estate - Investment Dashboard\')]'));
     /* My Investments table: */
-    var btnSelectItemsPerPage = element(by.xpath('//span[@class=\'k-select\']/span[@class=\'k-icon k-i-arrow-s\']'));
-    var itemsCounter = element(by.xpath('//span[@class=\'k-pager-info k-label\']'));
-    var lnkDisabledGoLastPage = element(by.xpath('//div[@class=\'k-pager-wrap k-grid-pager k-widget k-floatwrap\']/a[last()][@class=\'k-link k-pager-nav k-pager-last k-state-disabled\']'));
     var lnkGoNextPage = element(by.xpath('//a[@title=\'Go to the next page\']/span'));
     var nextPage = element(by.xpath('//a[@title=\'Go to the next page\']'));
     // filters
     var btnPlatformList = element(by.xpath('//span[@data-field=\'platformName\']//div'));
-    // element.all(by.xpath(‘//div[@title='Fundrise']’)).count()
-
-
 
     this.filterInvestmentsByPlatform = function(platform) {
         btnPlatformList.click();
         element(by.xpath('//li[contains(text(),\'' + platform + '\')]')).click();
     };
 
+    /**
+     *
+     * @param tableSelector - the css selector for the table rows, e.g. "#leftGridContainer .ngRow"
+     * @param columnSelector - the additional css selector for the columns in a row, e.g. ".ng-binding"
+     * @param colNames - an array of strings with the names of the columns
+     * @returns {webdriver.promise.Promise<T[]>}
+     */
+    var getTableValues = function(tableSelector, columnSelector, colNames) {
+        return element.all(by.css(tableSelector)).map(function(row, index) {
+            var columns = row.all(by.css(columnSelector));
 
+            return columns.then(function(cols){
+                var result = {};
+                cols.forEach(function(col, idx) {
+                    result[colNames[idx]] = col.getText();
+                    result.rowElm = row;
+                });
+                return result;
+            });
+        });
+    };
+
+    /**
+     *
+     * @param tableSelector
+     * @param columnSelector
+     * @param colNames
+     * @returns {*}
+     */
+    this.getTableValues2 = function(tableSelector, columnSelector, colNames) {
+        return browser.driver.executeScript("return (function(){" +
+            "var rows = []; var row = {}; var colNames = " + JSON.stringify(colNames) + ";" +
+            "angular.element('" + tableSelector + " " + columnSelector + "')" +
+            ".each(function(idx, c) {" +
+            "  var colIdx = idx % colNames.length;" +
+            "  row[colNames[colIdx]] = $(c).text();" +
+            "  if (colIdx == colNames.length - 1) {" +
+            "    rows.push(row);" +
+            "    row = {};" +
+            "  }" +
+            "});" +
+            "return JSON.stringify(rows);" +
+            "})();").
+            then(function(s) {
+                var data = JSON.parse(s);
+                // We have the table data, now supplement it with the WebElement for each row
+                return element.all(by.css(tableSelector)).then(function(rows) {
+                    _.each(rows, function(row, idx) {
+                        data[idx].rowElm = row;
+                    });
+                    return data;
+                });
+            });
+    };
 
     this.hasNextPage = function() {
         browser.executeScript("document.getElementsByClassName('k-pager-wrap k-grid-pager k-widget k-floatwrap')[0].scrollIntoView();");
@@ -29,7 +76,6 @@ var RealEstatePage = function() {
 
     this.clickNextPage = function () {
         lnkGoNextPage.click();
-        console.log('clicked')
     };
 
     this.getRealEstatePageHeader = function() {
