@@ -261,6 +261,7 @@ describe('Real Estate - Investment Dashboard', function() {
             // array index of 'dbData'
             var index = 0;
             var rowNumber = 1;
+
             describe('Investment table', function() {
                 it('check each row', function () {
                     // focus on the 'My Investments' table
