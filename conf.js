@@ -29,8 +29,8 @@ var reporter = new HtmlReporter({
         var currentDate = new Date(),
             currentHoursIn24Hour = currentDate.getHours(),
             currentTimeInHours = currentHoursIn24Hour>12? currentHoursIn24Hour-12: currentHoursIn24Hour,
-            totalDateString = currentDate.getDate()+'-'+ monthMap[currentDate.getMonth()+1]+ '-'+(currentDate.getYear()+1900) +
-                '-'+ currentTimeInHours+'h-' + currentDate.getMinutes()+'m';
+            totalDateString = currentDate.getDate()+'-'+ monthMap[currentDate.getMonth()+1]+ '-'+(currentDate.getYear()+1900);
+                //+ '-'+ currentTimeInHours+'h-' + currentDate.getMinutes()+'m';
 
         return path.join(totalDateString,capabilities.caps_.browserName, descriptions.join('-'));
     }
