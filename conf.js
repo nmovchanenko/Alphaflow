@@ -37,7 +37,7 @@ var reporter = new HtmlReporter({
 });
 
 exports.config = {
-    seleniumAddress: 'http://192.168.88.130:4444/wd/hub',
+    //seleniumAddress: 'http://192.168.88.130:4444/wd/hub',
 
     specs: ['tests/*.js'],
 
