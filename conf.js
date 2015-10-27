@@ -39,12 +39,13 @@ var reporter = new HtmlReporter({
 exports.config = {
     //seleniumAddress: 'http://192.168.88.130:4444/wd/hub',
 
-    specs: ['tests/*.js'],
+    //specs: ['tests/*.js'],
+    specs: ['tests/CheckMyInvestmentsTable.js'],
 
     baseUrl: 'http://qa.alphaflow.com',
 
     capabilities: {
-        'browserName': 'firefox',
+        'browserName': 'chrome',
         'chromeOptions': {
             'args': ['disable-extensions', 'start-maximized', 'enable-crash-reporter-for-testing']
         },
