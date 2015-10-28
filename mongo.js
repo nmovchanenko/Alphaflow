@@ -12,7 +12,8 @@ Collection.prototype.findAsync = function() {
     return cursor;
 };
 
-var connectToMongo = MongoClient.connectAsync('mongodb://af_qa_user:8q8a^~&r0U+(7nP@ds045333-a0.mongolab.com:45333,ds045333-a1.mongolab.com:45333/alphaflow_qa?replicaSet=rs-ds045333');   //mongodb://localhost:27017/alphaflow
+var connectToMongo = MongoClient.connectAsync('mongodb://af_qa_user:8q8a^~&r0U+(7nP@ds045333-a0.mongolab.com:45333,ds045333-a1.mongolab.com:45333/alphaflow_qa?replicaSet=rs-ds045333');
+//var connectToMongo = MongoClient.connectAsync('mongodb://localhost:27017/demo');
 
 module.exports = {
     connect: function () {

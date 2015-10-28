@@ -34,7 +34,6 @@ goog.require('goog.math.Coordinate');
  * @param {number} right Right.
  * @param {number} bottom Bottom.
  * @param {number} left Left.
- * @struct
  * @constructor
  */
 goog.math.Box = function(top, right, bottom, left) {
