@@ -1,5 +1,10 @@
-# Alphaflow
-Protractor e2e testing. 
+Alphaflow
+===============
+Protractor e2e testing.
 
-Install dependencies:
-npm install
+Setup
+-----
+
+    git clone https://github.com/nmovchanenko/Alphaflow.git
+    cd Alphaflow
+    npm install
