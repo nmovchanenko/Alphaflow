@@ -1,4 +1,4 @@
-var BaseOperations = require('../common/BaseOperations.js');
+var BaseOperations = require('../common/BaseSteps.js');
 var base = new BaseOperations();
 
 var RealEstatePage = function() {
@@ -82,7 +82,7 @@ var RealEstatePage = function() {
         return realEstatePageHeader.getText();
     };
 
-    this.readSingleInvestment = function(rowNumber) {
+    function readRow(rowNumber) {
 
         return new Promise(function(resolve, reject) {
             var investmentDataInRow = new Map();
@@ -113,7 +113,7 @@ var RealEstatePage = function() {
 
             resolve(investmentDataInRow);
         });
-    };
+    }
 
     this.readInvestmentsOnPage = function() {
 
@@ -129,7 +129,7 @@ var RealEstatePage = function() {
                     it('check each row', function () {
                         // focus on the 'My Investments' table
                         browser.executeScript("document.getElementsByClassName('k-grid-content')[0].scrollIntoView();");
-                        RealEstatePage.readSingleInvestment(rowNumber).then(investmentMap => {
+                        readRow(rowNumber).then(investmentMap => {
                             expect(investmentMap.get('platform')).toEqual(dbData[index].platform);
                             expect(investmentMap.get('title')).toEqual(dbData[index].title);
 
@@ -145,5 +145,81 @@ var RealEstatePage = function() {
 
     };
 
+    this.readTable = function() {
+        return new Promise(function(resole, reject) {
+            var tableData = new Map();
+            var pageAmount = getPageAmount();
+
+            pageAmount.each(function() {
+                readPage().then(map => {
+                    tableData.set('platform', map.get(0));
+                    tableData.set('title', map.get(1));
+                })
+            });
+
+            resole(tableData);
+        });
+    };
+
+    function getRowAmount() {
+        return element.all(by.xpath('//tbody[@role=\'rowgroup\']/tr')).count();
+    }
+
+    function getPageAmount() {
+        return element(by.xpath('//a[@title=\'Go to the last page\']')).getAttribute('data-page');
+    }
+
+    function readPage() {
+        return new Promise(function(resolve, reject){
+            var dataMap = new Map();
+            var rows = $$('tbody[role=\'rowgroup\']>tr');
+            var rowNumber = 1;
+
+            rows.each(function() {
+                readRow(rowNumber).then(map => {
+                    dataMap.set('platform', map.get(0));
+                    dataMap.set('title', map.get(1));
+                });
+                rowNumber++;
+            });
+
+            resolve(dataMap);
+        })
+    }
+
+
 };
 module.exports = RealEstatePage;
+//
+//module.exports = {
+//    readRow: function(rowNumber) {
+//        return new Promise(function(resolve, reject) {
+//            var investmentDataInRow = new Map();
+//
+//            var platformName = element(by.xpath('//tbody[@role=\'rowgroup\']/tr[' + rowNumber + ']//td[1]//div[@class=\'text-center\']'));
+//            investmentDataInRow.set('platform', platformName.getWebElement().getAttribute('title'));
+//
+//            var investmentTitle = element(by.xpath('//tbody[@role=\'rowgroup\']/tr[' + rowNumber + ']//td[2]//a'));
+//            investmentDataInRow.set('title', investmentTitle.getText());
+//
+//            resolve(investmentDataInRow);
+//        });
+//},
+//    readPage: function () {
+//        return new Promise(function(resolve, reject){
+//            var dataMap = new Map();
+//            var rows = $$('tbody[role=\'rowgroup\']>tr');
+//            var rowNumber = 1;
+//
+//            rows.each(function() {
+//                this.readRow(rowNumber).then(map => {
+//                    dataMap.set('platform', map.get(0));
+//                    dataMap.set('title', map.get(1));
+//                });
+//                rowNumber++;
+//            });
+//
+//            resolve(dataMap);
+//        })
+//    }
+//};
