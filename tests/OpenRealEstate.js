@@ -1,9 +1,9 @@
 var userData = require('../resources/users.json');
 var profiles = require('../resources/profiles.json');
 
-var BaseOperations = require('../common/BaseOperations.js');
-var Sidebar = require('../forms/Sidebar.js');
-var RealEstatePage = require('../pages/RealEstatePage.js');
+var BaseOperations = require('../common/BaseSteps.js');
+var Sidebar = require('./Sidebar.js');
+var RealEstatePage = require('./RealEstatePage.js');
 
 describe('Real Estate - Investment Dashboard', function() {
     var base = new BaseOperations();

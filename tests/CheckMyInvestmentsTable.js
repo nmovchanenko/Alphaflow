@@ -1,7 +1,7 @@
 var platforms = require('../resources/platforms.json');
 var userData = require('../resources/users.json');
-var BaseOperations = require('../common/BaseOperations.js');
-var RealEstatePage = require('../pages/RealEstatePage.js');
+var BaseOperations = require('../common/BaseSteps.js');
+var RealEstatePage = require('./RealEstatePage.js');
 
 describe('Real Estate - Investment Dashboard', function() {
     var base = new BaseOperations();
@@ -254,12 +254,39 @@ describe('Real Estate - Investment Dashboard', function() {
         base.openBogdanRealEstate(userData.validEmail, userData.validPass);
         realEstate.filterInvestmentsByPlatform(platforms.fundrise);
 
-
-        /*realEstate.readInvestmentsOnPage().then(hasPage => {
-            if (hasPage) {
-                realEstate.clickNextPage();
+        readPage().then(map => {
+            for(var entry of map) {
+                console.log('Result: ' + entry);
             }
-        });*/
+        });
+
+        function readPage() {
+            return new Promise(function(resolve, reject){
+                var dataMap = new Map();
+                var rows = $$('tbody[role=\'rowgroup\']>tr');
+                var rowNumber = 1;
+                rows.each(function() {
+                    readRow(rowNumber).then(map => {
+                        dataMap.set('platform', map.get(0));
+                        dataMap.set('title', map.get(1));
+                    });
+                    rowNumber++;
+                });
+                resolve(dataMap);
+            })
+        }
+
+        function readRow(rowNumber) {
+            return new Promise(function(resolve, reject) {
+                var investmentDataInRow = new Map();
+                var platformName = element(by.xpath('//tbody[@role=\'rowgroup\']/tr[' + rowNumber + ']//td[1]//div[@class=\'text-center\']'));
+                investmentDataInRow.set('platform', platformName.getWebElement().getAttribute('title'));
+                var investmentTitle = element(by.xpath('//tbody[@role=\'rowgroup\']/tr[' + rowNumber + ']//td[2]//a'));
+                investmentDataInRow.set('title', investmentTitle.getText());
+                resolve(investmentDataInRow);
+            });
+        }
+
 
         //-----------------------------------
         /*// variable 'grid' contains rows, which are represented on the first page of Investment table
@@ -272,7 +299,7 @@ describe('Real Estate - Investment Dashboard', function() {
                 it('check each row', function () {
                     // focus on the 'My Investments' table
                     browser.executeScript("document.getElementsByClassName('k-grid-content')[0].scrollIntoView();");
-                    realEstate.readSingleInvestment(rowNumber).then(investmentMap => {
+                    realEstate.readRow(rowNumber).then(investmentMap => {
                         expect(investmentMap.get('platform')).toEqual(dbData[index].platform);
                         expect(investmentMap.get('title')).toEqual(dbData[index].title);
 

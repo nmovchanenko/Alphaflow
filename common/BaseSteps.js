@@ -2,7 +2,7 @@
  *  This script contains basic operations for working with the app.
  */
 var LogInPage = require('../pages/LogInPage.js');
-var Sidebar = require('../forms/Sidebar.js');
+var Sidebar = require('../pages/components/Sidebar.js');
 
 var BaseOperations = function() {
     var condition = protractor.ExpectedConditions;

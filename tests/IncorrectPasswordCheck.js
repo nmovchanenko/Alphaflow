@@ -1,5 +1,5 @@
-var SignUpPage = require('../pages/SignUpPage.js');
-var RandomUtils = require('../utils/RandomUtils.js');
+var SignUpPage = require('./SignUpPage.js');
+var RandomUtils = require('./RandomUtils.js');
 
 describe('Incorrect password during sign up check', function(){
     var signUpPage = new SignUpPage();

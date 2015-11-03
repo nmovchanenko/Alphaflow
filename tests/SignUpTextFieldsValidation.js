@@ -1,4 +1,4 @@
-var SignUpPage = require('../pages/SignUpPage.js');
+var SignUpPage = require('./SignUpPage.js');
 var data = require('../resources/regexpData.json');
 
 describe('SignUp page', function() {

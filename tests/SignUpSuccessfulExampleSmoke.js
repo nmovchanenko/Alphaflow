@@ -1,6 +1,6 @@
-var SignUpPage = require('../pages/SignUpPageExample.js');
-var RandomUtils = require('../utils/RandomUtils.js');
-var Scenarios = require('../scenarios/CommonScenarios.js');
+var SignUpPage = require('./SignUpPageExample.js');
+var RandomUtils = require('./RandomUtils.js');
+var Scenarios = require('./CustomCommands.js');
 
 describe('Sign up with valid parameters should be successful', function() {
     var signUpPage = new SignUpPage;

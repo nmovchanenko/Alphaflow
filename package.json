@@ -11,14 +11,21 @@
     "url": "https://github.com/nmovchanenko/Alphaflow.git"
   },
   "dependencies": {
+    "minijasminenode": "1.1.1",
+    "jasminewd": "1.1.0",
+    "jasminewd2": "0.0.5",
+    "jasmine": "2.3.1",
     "selenium-webdriver": "2.45.1",
-    "bluebird" : "3.0.1",
+    "bluebird": "3.0.1",
     "mongodb": "~2.0",
     "express": "~3.4.0",
     "protractor": "2.1.0",
     "mkdirp": "~0.3.5",
     "q": "1.0.0",
     "firefox-profile": "0.3.4",
-    "protractor-html-screenshot-reporter" : "0.0.3"
+    "protractor-html-screenshot-reporter": "0.0.3"
+  },
+  "devDependencies": {
+    "jasmine-reporters": "^2.0.0"
   }
 }
