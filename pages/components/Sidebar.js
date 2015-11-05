@@ -1,3 +1,7 @@
+var AfButton = require('../../core/elements/AfButton.js'),
+    AfTextBox = require('../../core/elements/AfTextBox.js'),
+    AfLink = require('../../core/elements/AfLink.js');
+
 /**
  *  This script describes a sidebar on the dashboard page.
  *  Sidebar contains:
@@ -9,10 +13,10 @@
  */
 var Sidebar = function() {
     var profileName = element(by.xpath('//strong[@class=\'font-bold ng-binding\']'));
-    var realEstate = element(by.xpath('//a[contains(text(),\'Real Estate\')]'));
+    var realEstate = new AfLink(by.xpath('//a[contains(text(),\'Real Estate\')]'), '\'Real Estate\' link');
     var dashboardMenu = element(by.xpath('//ul[@id=\'side-menu\']/li[2]/a'));
     var adminMenu = element(by.xpath('//ul[@id=\'side-menu\']/li[5]/a'));
-    var usersLink = element(by.xpath('//a[contains(text(),\'Users\')]'));
+    this.usersLink = new AfLink(by.xpath('//a[contains(text(),\'Users\')]'), '\Users\' link');
 
     this.getProfileName = function() {
         return profileName.getText();
@@ -31,7 +35,7 @@ var Sidebar = function() {
     };
 
     this.lnkUsers = function() {
-        return usersLink;
+        return this.usersLink;
     };
 };
 module.exports = Sidebar;

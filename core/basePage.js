@@ -1,15 +1,9 @@
-// TODO: exception handling
 
-var CustomCommands = function() {
-
-    this.openPage = function(url) {
-        browser.get(url);
-        logger.info('Opened: ' + url);
-    };
+var BasePage = function() {
 
     /**
      * wait and verify that a page is loaded
-     *
+     * 
      * @requires a page to include `pageLoaded` method
      */
     this.at = function() {
@@ -19,7 +13,7 @@ var CustomCommands = function() {
     /**
      * navigate to a page via it's `url` var
      * and verify/wait via at()
-     *
+     * 
      * @requires page have both `url` and `pageLoaded` properties
      */
     this.to = function() {
@@ -83,7 +77,7 @@ var CustomCommands = function() {
 
     /**
      * test if an element has a class
-     *
+     * 
      * @param  {elementFinder} locator - eg. $('div#myId')
      * @param  {string}  klass  - class name
      * @return {Boolean} - does the element have the class?
@@ -104,8 +98,9 @@ var CustomCommands = function() {
     /**
      * switches focus to a new window
      * @param  {int} windowHandleIndex - the nth window to switch to
+     * @param  {pageObject} targetPage - the page we'll be on after the switch
      */
-    this.switchToWindow = function(windowHandleIndex) {
+    this.switchToWindow = function(windowHandleIndex, targetPage) {
         var that = this;
         // wait for new page to open...
         var handle = browser.wait(function() {
@@ -120,12 +115,14 @@ var CustomCommands = function() {
         }, this.timeout.xxl);
         logger.trace('switching to window ' + windowHandleIndex);
         browser.switchTo().window(handle);
+        // test that we're at the new page...
+        targetPage.at();
     };
 
     /**
      * get an element's width
      * extend's protractors ElementFinder
-     *
+     * 
      * @return {int} - the width of the element
      */
     protractor.ElementFinder.prototype.getWidth = function () {
@@ -133,5 +130,8 @@ var CustomCommands = function() {
             return size.width;
         });
     };
+
+    //TODO: checkForAngular()
+
 };
-module.exports = CustomCommands;
+module.exports = new BasePage;

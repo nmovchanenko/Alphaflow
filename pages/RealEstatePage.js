@@ -1,5 +1,5 @@
-var BaseOperations = require('../common/BaseSteps.js');
-var base = new BaseOperations();
+var BaseSteps = require('../common/BaseSteps.js');
+var base = new BaseSteps();
 
 var RealEstatePage = function() {
     var realEstatePageHeader = element(by.xpath('//h2[contains(text(),\'Real Estate - Investment Dashboard\')]'));
@@ -10,8 +10,8 @@ var RealEstatePage = function() {
     var btnPlatformList = element(by.xpath('//span[@data-field=\'platformName\']//div'));
 
     this.filterInvestmentsByPlatform = function(platform) {
-        btnPlatformList.click();
-        element(by.xpath('//li[contains(text(),\'' + platform + '\')]')).click();
+        perform.clickOn(btnPlatformList);
+        perform.clickOn(element(by.xpath('//li[contains(text(),\'' + platform + '\')]')));
     };
 
     /**

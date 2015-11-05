@@ -1,4 +1,4 @@
-var LogInPage = require('./LogInPage.js');
+var LogInPage = require('../pages/LogInPage.js');
 var userData = require('../resources/users.json');
 
 describe('Login page', function() {

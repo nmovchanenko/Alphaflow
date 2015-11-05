@@ -52,19 +52,23 @@ var BaseOperations = function() {
      */
     this.openBogdanRealEstate = function (email, password) {
         this.loginAs(email, password);
-        sidebar.lnkUsers().click();
+        perform.clickOn(sidebar.lnkUsers());
+
         // wait for 'User Administration' page
-        browser.wait(condition.visibilityOf(element(by.xpath('//h2[contains(text(),\'User Administration\')]'))), 15000);
+        perform.isVisible(element(by.xpath('//h2[contains(text(),\'User Administration\')]')));
+        //browser.wait(condition.visibilityOf(), 15000);
         // click 'Impersonate user' button
-        element(by.xpath('//div[contains(text(),\'Bogdan\')]/../preceding-sibling::div//button')).click();
+        perform.clickOn(element(by.xpath('//div[contains(text(),\'Bogdan\')]/../preceding-sibling::div//button')));
         // we have to wait until a new browsertab will be opened
         browser.sleep(5000);
         // switch to the opened tab
-        browser.getAllWindowHandles().then(function (handles) {
-            browser.switchTo().window(handles[1]);
-            var bogdanRealEstatePage = element(by.xpath('//h2[contains(text(),\'Real Estate - Investment Dashboard\')]'));
-            browser.wait(condition.visibilityOf(bogdanRealEstatePage), 15000);
-        });
+        perform.switchToWindow(1);
+        perform.isVisible(element(by.xpath('//h2[contains(text(),\'Real Estate - Investment Dashboard\')]')));
+        //browser.getAllWindowHandles().then(function (handles) {
+        //    browser.switchTo().window(handles[1]);
+        //    var bogdanRealEstatePage = element(by.xpath('//h2[contains(text(),\'Real Estate - Investment Dashboard\')]'));
+        //    browser.wait(condition.visibilityOf(bogdanRealEstatePage), 15000);
+        //});
     };
 
     /**
