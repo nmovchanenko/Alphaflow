@@ -1,0 +1,34 @@
+{
+  "name": "alphaflow",
+  "version": "1.0.0",
+  "description": "",
+  "main": "conf.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "bcrypt": "^0.8.5",
+    "bluebird": "^2.10.2",
+    "co": "^3.1.0",
+    "kongo": "0.0.7",
+    "lodash": "^3.10.1",
+    "mongodb": "~2.0.46",
+    "mongoose": "^4.2.3",
+    "mysql": "^2.9.0",
+    "protractor-html-screenshot-reporter": "^0.0.21"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nmovchanenko/Alphaflow.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nmovchanenko/Alphaflow/issues"
+  },
+  "homepage": "https://github.com/nmovchanenko/Alphaflow#readme"
+}
