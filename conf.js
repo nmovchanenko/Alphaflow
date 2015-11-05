@@ -29,22 +29,23 @@ var reporter = new HtmlReporter({
         var currentDate = new Date(),
             currentHoursIn24Hour = currentDate.getHours(),
             currentTimeInHours = currentHoursIn24Hour>12? currentHoursIn24Hour-12: currentHoursIn24Hour,
-            totalDateString = currentDate.getDate()+'-'+ monthMap[currentDate.getMonth()+1]+ '-'+(currentDate.getYear()+1900) +
-                '-'+ currentTimeInHours+'h-' + currentDate.getMinutes()+'m';
+            totalDateString = currentDate.getDate()+'-'+ monthMap[currentDate.getMonth()+1]+ '-'+(currentDate.getYear()+1900);
+                //+ '-'+ currentTimeInHours+'h-' + currentDate.getMinutes()+'m';
 
         return path.join(totalDateString,capabilities.caps_.browserName, descriptions.join('-'));
     }
 });
 
 exports.config = {
-    seleniumAddress: 'http://192.168.88.128:4444/wd/hub',
+    seleniumAddress: 'http://192.168.88.130:4444/wd/hub',
 
-    specs: ['tests/*.js'],
+    //specs: ['tests/*.js'],
+    specs: ['tests/CheckMyInvestmentsTable.js'],
 
     baseUrl: 'http://qa.alphaflow.com',
 
     capabilities: {
-        'browserName': 'chrome',
+        'browserName': 'firefox',
         'chromeOptions': {
             'args': ['disable-extensions', 'start-maximized', 'enable-crash-reporter-for-testing']
         },

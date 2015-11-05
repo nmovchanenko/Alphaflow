@@ -1,2 +1,4 @@
 test-conf.js
 .idea/
+node_modules/
+report/

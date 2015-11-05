@@ -1,10 +1,12 @@
 var platforms = require('../resources/platforms.json');
 var userData = require('../resources/users.json');
+var log4js = require('log4js');
 
 var BaseOperations = require('../common/BaseOperations.js');
 var RealEstatePage = require('../pages/RealEstatePage.js');
 
 describe('Real Estate - Investment Dashboard', function() {
+    var logger = log4js.getLogger();
     var base = new BaseOperations();
     var realEstate = new RealEstatePage();
     // array with random Investment data
@@ -255,13 +257,45 @@ describe('Real Estate - Investment Dashboard', function() {
         base.openBogdanRealEstate(userData.validEmail, userData.validPass);
         realEstate.filterInvestmentsByPlatform(platforms.fundrise);
 
-        // variable 'grid' contains rows, which are represented on the first page of Investment table
+
+        logger.trace('Entering cheese testing');
+        logger.debug('Got cheese.');
+        logger.info('Cheese is Gouda.');
+        logger.warn('Cheese is quite smelly.');
+        logger.error('Cheese is too ripe!');
+        logger.fatal('Cheese was breeding ground for listeria.');
+
+        /*realEstate.readInvestmentsOnPage().then(hasPage => {
+            if (hasPage) {
+                realEstate.clickNextPage();
+            }
+        });*/
+
+        //-----------------------------------
+        /*// variable 'grid' contains rows, which are represented on the first page of Investment table
         var grid = $$('tbody[role=\'rowgroup\']>tr');
         // array index of 'dbData'
         var index = 0;
         var rowNumber = 1;
+        grid.each(function () {
+            describe('Investment table', function() {
+                it('check each row', function () {
+                    // focus on the 'My Investments' table
+                    browser.executeScript("document.getElementsByClassName('k-grid-content')[0].scrollIntoView();");
+                    realEstate.readSingleInvestment(rowNumber).then(investmentMap => {
+                        expect(investmentMap.get('platform')).toEqual(dbData[index].platform);
+                        expect(investmentMap.get('title')).toEqual(dbData[index].title);
 
-        grid.each(function() {
+                    });
+                    index++;
+                    rowNumber++;
+                })
+            })
+        });*/
+
+        //--------------------------------------------------
+
+        /*grid.each(function() {
             describe('Investment table', function() {
                 it('check each row', function () {
                     // focus on the 'My Investments' table
@@ -302,6 +336,7 @@ describe('Real Estate - Investment Dashboard', function() {
                     index++;
                 })
             })
-        })
+        })*/
     });
+
 });
