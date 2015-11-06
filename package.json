@@ -2,7 +2,7 @@
   "name": "Alphaflow",
   "version": "",
   "author": "",
-  "elDesc": "Alphaflow - e2e testing with protractor",
+  "elementDescription": "Alphaflow - e2e testing with protractor",
   "scripts": {
     "test": "node_modules/.bin/protractor conf.js"
   },
@@ -21,12 +21,15 @@
     "minijasminenode": "1.1.1",
     "mkdirp": "~0.3.5",
     "mongodb": "~2.0",
+    "path": "^0.12.7",
     "protractor": "2.1.0",
     "protractor-html-screenshot-reporter": "0.0.3",
     "q": "1.0.0",
     "selenium-webdriver": "2.45.1"
   },
   "devDependencies": {
-    "jasmine-reporters": "^2.0.0"
+    "jasmine-reporters": "^2.0.0",
+    "protractor-jasmine2-html-reporter": "0.0.5",
+    "protractor-jasmine2-screenshot-reporter": "^0.1.7"
   }
 }

@@ -11,14 +11,14 @@ AfTextBox.prototype = Object.create(BaseElement.prototype);
 AfTextBox.prototype.constructor = AfTextBox;
 
 AfTextBox.prototype.typeText = function(text) {
-    var descr = this.elDesc;
+    var descr = this.elementDescription;
     this.webElement.sendKeys(text).then(function() {
-        logger.info(descr + ': type \'' + text + '\'');
+        logger.info(descr + ': typed \'' + text + '\'');
     });
 };
 
 AfTextBox.prototype.clear = function() {
-    var descr = this.elDesc;
+    var descr = this.elementDescription;
     this.webElement.clear().then(function() {
         logger.info(descr + ': cleared');
     });

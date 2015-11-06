@@ -1,17 +1,18 @@
-var BaseSteps = require('../common/BaseSteps.js');
-var base = new BaseSteps();
+var BaseSteps   = require('../common/BaseSteps.js'),
+    AfH2        = require('../core/elements/AfH2.js'),
+    AfButton    = require('../core/elements/AfButton.js'),
+    AfLink      = require('../core/elements/AfLink.js'),
+    AfSpan      = require('../core/elements/AfSpan.js');
 
 var RealEstatePage = function() {
-    var realEstatePageHeader = element(by.xpath('//h2[contains(text(),\'Real Estate - Investment Dashboard\')]'));
-    /* My Investments table: */
-    var lnkGoNextPage = element(by.xpath('//a[@title=\'Go to the next page\']/span'));
-    var nextPage = element(by.xpath('//a[@title=\'Go to the next page\']'));
-    // filters
-    var btnPlatformList = element(by.xpath('//span[@data-field=\'platformName\']//div'));
+    this.realEstatePageHeader   = new AfH2(by.xpath('//h2'),                                            'Real Estate Header');
+    this.lnkGoNextPage          = new AfSpan(by.xpath('//a[@title=\'Go to the next page\']/span'),      'Go to the next page');
+    this.nextPage               = new AfLink(by.xpath('//a[@title=\'Go to the next page\']'));
+    this.btnPlatformList        = new AfButton(by.xpath('//span[@data-field=\'platformName\']//div'),   'Show Platforms');
 
     this.filterInvestmentsByPlatform = function(platform) {
-        perform.clickOn(btnPlatformList);
-        perform.clickOn(element(by.xpath('//li[contains(text(),\'' + platform + '\')]')));
+        this.btnPlatformList.click();
+        element(by.xpath('//li[contains(text(),\'' + platform + '\')]')).click();
     };
 
     /**
@@ -71,15 +72,15 @@ var RealEstatePage = function() {
 
     this.hasNextPage = function() {
         browser.executeScript("document.getElementsByClassName('k-pager-wrap k-grid-pager k-widget k-floatwrap')[0].scrollIntoView();");
-        return nextPage.getAttribute('class') == "k-link k-pager-nav";
+        return this.nextPage.getAttribute('class') == "k-link k-pager-nav";
     };
 
     this.clickNextPage = function () {
-        lnkGoNextPage.click();
+        this.lnkGoNextPage.click();
     };
 
     this.getRealEstatePageHeader = function() {
-        return realEstatePageHeader.getText();
+        return this.realEstatePageHeader.getText();
     };
 
     function readRow(rowNumber) {
@@ -190,36 +191,3 @@ var RealEstatePage = function() {
 
 };
 module.exports = RealEstatePage;
-//
-//module.exports = {
-//    readRow: function(rowNumber) {
-//        return new Promise(function(resolve, reject) {
-//            var investmentDataInRow = new Map();
-//
-//            var platformName = element(by.xpath('//tbody[@role=\'rowgroup\']/tr[' + rowNumber + ']//td[1]//div[@class=\'text-center\']'));
-//            investmentDataInRow.set('platform', platformName.getWebElement().getAttribute('title'));
-//
-//            var investmentTitle = element(by.xpath('//tbody[@role=\'rowgroup\']/tr[' + rowNumber + ']//td[2]//a'));
-//            investmentDataInRow.set('title', investmentTitle.getText());
-//
-//            resolve(investmentDataInRow);
-//        });
-//},
-//    readPage: function () {
-//        return new Promise(function(resolve, reject){
-//            var dataMap = new Map();
-//            var rows = $$('tbody[role=\'rowgroup\']>tr');
-//            var rowNumber = 1;
-//
-//            rows.each(function() {
-//                this.readRow(rowNumber).then(map => {
-//                    dataMap.set('platform', map.get(0));
-//                    dataMap.set('title', map.get(1));
-//                });
-//                rowNumber++;
-//            });
-//
-//            resolve(dataMap);
-//        })
-//    }
-//};

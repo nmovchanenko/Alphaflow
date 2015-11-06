@@ -1,14 +1,14 @@
-var SignUpPage = function() {
+var SignUpPageExample = function() {
 
-    this.emailTextBox = function () {
+    this.txbEmail = function () {
         return element(by.id('afSignupEmail'));
     };
 
-    this.repeatEmailTextBox = function () {
+    this.txbRepeatEmail = function () {
         return element(by.id('afRepeatSignupEmail'));
     };
 
-    this.passwordTextBox = function() {
+    this.txbPassword = function() {
         return element(by.id('afSignupPassword'));
     };
 
@@ -16,15 +16,15 @@ var SignUpPage = function() {
         return element(by.id('afSignupPasswordConfirm'));
     };
 
-    this.firstNameTextBox = function () {
+    this.txbFirstName = function () {
         return element(by.id('afSignupFirstName'));
     };
 
-    this.lastNameTextBox = function () {
+    this.txbLastName = function () {
         return element(by.id('afSignupLastName'));
     };
 
-    this.logInButton = function () {
+    this.btnLogin = function () {
       return element(by.css('.submit'));
     };
 
@@ -49,4 +49,4 @@ var SignUpPage = function() {
     }
 
 };
-module.exports = SignUpPage;
+module.exports = SignUpPageExample;

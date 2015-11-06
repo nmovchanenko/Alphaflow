@@ -1,35 +1,21 @@
-var basePage = require('../core/BasePage');
+var AfButton    = require('../core/elements/AfButton.js'),
+    AfTextBox   = require('../core/elements/AfTextBox.js'),
+    AfSpan      = require('../core/elements/AfSpan.js'),
+    AfDiv       = require('../core/elements/AfDiv.js'),
+    AfLink      = require('../core/elements/AfLink.js');
 
 var LogInPage = function() {
-    var emailTextField = element(by.id('afEmail'));
-    var passwordTextField = element(by.id('afPassword'));
-    var logInButton = element(by.id('afLoginFormSubmi'));
-    var validationMessage = element(by.xpath('//div[1]/div/p'));
+    this.txbEmail               = new AfTextBox(by.id('afEmail'),           'Email');
+    this.txbPassword            = new AfTextBox(by.id('afPassword'),        'Password');
+    this.btnLogin               = new AfButton(by.id('afLoginFormSubmit'),  'Login');
+    this.divValidationMessage   = new AfDiv(by.css('.alert.alert-danger.ng-binding'));
 
     this.openLoginPage = function() {
-        perform.openPage('/login');
+        browser.get('/login');
     };
-
-    this.typeEmail = function(email) {
-        perform.typeText(emailTextField, email);
-    };
-
-    this.typePassword = function(password) {
-        perform.typeText(passwordTextField, password);
-    };
-
-    this.clickLogin = function() {
-        perform.clickOn(logInButton);
-    };
-
-    //this.loginAs = function(email, password) {
-    //    emailTextField.sendKeys(email);
-    //    passwordTextField.sendKeys(password);
-    //    logInButton.click();
-    //};
 
     this.getValidationMessage = function() {
-        return validationMessage.getText();
+        return this.divValidationMessage.getText();
     };
 
 };

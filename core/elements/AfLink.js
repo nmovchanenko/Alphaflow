@@ -12,9 +12,9 @@ AfLink.prototype = Object.create(BaseElement.prototype);
 AfLink.prototype.constructor = AfLink;
 
 AfLink.prototype.click = function() {
-    var descr = this.elDesc;
+    var descr = this.elementDescription;
     this.webElement.click().then(function() {
-        logger.info(descr + ': click');
+        logger.info(descr + ': clicked');
     });
 };
 
