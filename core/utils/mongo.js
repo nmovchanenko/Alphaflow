@@ -27,8 +27,29 @@ module.exports = {
         return connectToMongo.then(function (db) {
             var users = db.collection('users');
 
-            return users.findAsync({_id: new MongoDB.ObjectId(id)}).toArrayAsync();
+            return users.findOneAsync({_id: new MongoDB.ObjectId(id)});
         });
+    },
+
+    getContributionsCollection: function() {
+        return connectToMongo.then(function (db) {
+            var contributions = db.collection('contributions');
+
+            return contributions;
+        });
+    },
+
+     getContributionsByPlatform: function(platformId) {
+         if (!platformId) {
+             throw new Error('No Platform id passed');
+         }
+         return this.getContributionsCollection().findAsync({_id: new MongoDB.ObjectId(platformId)}).toArrayAsync();
+     },
+
+    getContributionsByPlatformIds: function (owner, platformIds) {
+        return this.getContributionsCollection().then(function (contributions) {
+            return contributions.findAsync({platform: {$in: platformIds}, owner: owner}).toArrayAsync();
+        })
     }
 };
 
