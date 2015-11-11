@@ -1,14 +1,14 @@
 var BaseElement = require('./BaseElement.js'),
     CustomError = require('../exceptions/CustomError.js');
 
-var AfButton = function (locator, description) {
+var Button = function (locator, description) {
     BaseElement.apply(this, arguments);
 };
 
-AfButton.prototype = Object.create(BaseElement.prototype);
-AfButton.prototype.constructor = AfButton;
+Button.prototype = Object.create(BaseElement.prototype);
+Button.prototype.constructor = Button;
 
-AfButton.prototype.click = function() {
+Button.prototype.click = function() {
     var descr = this.elementDescription;
         this.webElement.click().then(function() {
             logger.info(descr + ': clicked');
@@ -17,4 +17,4 @@ AfButton.prototype.click = function() {
         })
 };
 
-module.exports = AfButton;
+module.exports = Button;

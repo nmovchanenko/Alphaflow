@@ -4,23 +4,23 @@
 var BaseElement = require('./BaseElement.js');
 
 //-------------------------------------------------------------------------------------
-var AfLink = function (locator, description) {
+var Link = function (locator, description) {
     BaseElement.apply(this, arguments);
 };
 
-AfLink.prototype = Object.create(BaseElement.prototype);
-AfLink.prototype.constructor = AfLink;
+Link.prototype = Object.create(BaseElement.prototype);
+Link.prototype.constructor = Link;
 
-AfLink.prototype.click = function() {
+Link.prototype.click = function() {
     var descr = this.elementDescription;
     this.webElement.click().then(function() {
         logger.info(descr + ': clicked');
     });
 };
 
-AfLink.prototype.getHref = function() {
+Link.prototype.getHref = function() {
     return this.webElement.getAttribute('href');
 };
 
 
-module.exports = AfLink;
+module.exports = Link;

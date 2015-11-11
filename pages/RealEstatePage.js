@@ -1,14 +1,13 @@
 var BaseSteps   = require('../common/BaseSteps.js'),
-    AfH2        = require('../core/elements/AfH2.js'),
-    AfButton    = require('../core/elements/AfButton.js'),
-    AfLink      = require('../core/elements/AfLink.js'),
-    AfSpan      = require('../core/elements/AfSpan.js');
+    TextBlock   = require('../core/elements/TextBlock.js'),
+    Button    = require('../core/elements/Button.js'),
+    Link      = require('../core/elements/Link.js');
 
 var RealEstatePage = function() {
-    this.realEstatePageHeader   = new AfH2(by.xpath('//h2'),                                            'Real Estate Header');
-    this.lnkGoNextPage          = new AfSpan(by.xpath('//a[@title=\'Go to the next page\']/span'),      'Go to the next page');
-    this.nextPage               = new AfLink(by.xpath('//a[@title=\'Go to the next page\']'));
-    this.btnPlatformList        = new AfButton(by.xpath('//span[@data-field=\'platformName\']//div'),   'Show Platforms');
+    this.realEstatePageHeader   = new TextBlock(by.xpath('//h2'),                                       'Real Estate Header');
+    this.lnkGoNextPage          = new TextBlock(by.xpath('//a[@title=\'Go to the next page\']/span'),   'Go to the next page');
+    this.nextPage               = new Link(by.xpath('//a[@title=\'Go to the next page\']'));
+    this.btnPlatformList        = new Button(by.xpath('//span[@data-field=\'platformName\']//div'),     'Show Platforms');
 
     this.filterInvestmentsByPlatform = function(platform) {
         this.btnPlatformList.click();

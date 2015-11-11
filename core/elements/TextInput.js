@@ -3,25 +3,25 @@
  */
 var BaseElement = require('./BaseElement.js');
 
-var AfTextBox = function (locator, description) {
+var TextInput = function (locator, description) {
     BaseElement.apply(this, arguments);
 };
 
-AfTextBox.prototype = Object.create(BaseElement.prototype);
-AfTextBox.prototype.constructor = AfTextBox;
+TextInput.prototype = Object.create(BaseElement.prototype);
+TextInput.prototype.constructor = TextInput;
 
-AfTextBox.prototype.typeText = function(text) {
+TextInput.prototype.typeText = function(text) {
     var descr = this.elementDescription;
     this.webElement.sendKeys(text).then(function() {
         logger.info(descr + ': typed \'' + text + '\'');
     });
 };
 
-AfTextBox.prototype.clear = function() {
+TextInput.prototype.clear = function() {
     var descr = this.elementDescription;
     this.webElement.clear().then(function() {
         logger.info(descr + ': cleared');
     });
 };
 
-module.exports = AfTextBox;
+module.exports = TextInput;

@@ -65,27 +65,5 @@ var BaseSteps = function() {
         perform.switchToWindow(1);
         perform.isVisible(element(by.xpath('//h2[contains(text(),\'Real Estate - Investment Dashboard\')]')));
     };
-
-    /**
-     * Scroll page to coordinates
-     * @param x
-     * @param y
-     */
-    this.scrollPageTo = function(x, y) {
-        browser.executeScript('window.scrollTo(' + x + ',' + y + ');').then(function () {
-            browser.sleep(1000);
-        });
-    };
-
-    /**
-     * Zooms the page
-     * @param scale (e.g. 0.9)
-     */
-    this.setZoom = function(scale) {
-        browser.executeScript('document.body.style.transform=\'scale(' + scale + '%)\';').then(function () {
-            browser.sleep(3000);
-        });
-    };
-
 };
 module.exports = BaseSteps;
