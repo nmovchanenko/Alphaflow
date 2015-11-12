@@ -118,7 +118,7 @@ var CustomCommands = function() {
                 }
             });
         }, this.timeout.xxl);
-        logger.trace('switching to window ' + windowHandleIndex);
+        logger.info('switching to window ' + windowHandleIndex);
         browser.switchTo().window(handle);
     };
 

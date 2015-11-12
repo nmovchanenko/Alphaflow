@@ -218,27 +218,16 @@ exports.config = {
      the filename string.
     */
      onPrepare: function() {
-         var log4js          = require('log4js'),
+         var Logger          = require('./core/logger/CustomLogger.js'),
              Command         = require('./core/commands/CustomCommands.js'),
              BaseSteps       = require('./common/BaseSteps.js'),
-             HtmlReporter    = require('protractor-jasmine2-html-reporter');
-
-         log4js.configure({
-             "appenders": [{
-                 "type": "log4js-protractor-appender"
-             }]
-         });
+             HtmlReporter    = require('./core/reporters/HtmlReporter.js');
 
          global.step     = new BaseSteps();
-         global.logger   = log4js.getLogger();
+         global.logger   = Logger.getCustomLogger();
          global.perform  = new Command();
 
-         jasmine.getEnv().addReporter(new HtmlReporter({
-             savePath: 'report/',
-             screenshotsFolder: 'images',
-             consolidate: true,
-             consolidateAll: true
-         }));
+         jasmine.getEnv().addReporter(HtmlReporter.getReporter());
     },
 
      /**
@@ -278,7 +267,7 @@ exports.config = {
      /**If true, protractor will restart the browser between each test.
      CAUTION: This will cause your tests to slow down drastically.
     */
-     restartBrowserBetweenTests: true,
+     restartBrowserBetweenTests: false,
 
      /**Protractor will track outstanding $timeouts by default, and report them in
      the error message if Protractor fails to synchronize with Angular in time.
