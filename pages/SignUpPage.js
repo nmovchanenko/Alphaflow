@@ -8,9 +8,14 @@ var SignUpPage = function() {
     this.txbEmail       = new AfTextBox(by.id('afSignupEmail'),         'Signup Email');
     this.txbRepeatEmail = new AfTextBox(by.id('afRepeatSignupEmail'),   'Repeat Signup Email');
     this.txbPassword    = new AfTextBox(by.id('afSignupPassword'),      'Signup Password');
+    this.txbConfirmPassword = new AfTextBox(by.id('afSignupPasswordConfirm'), 'Confirm Password');
     this.txbFirstName   = new AfTextBox(by.id('afSignupFirstName'),     'Signup First Name');
     this.txbLastName    = new AfTextBox(by.id('afSignupLastName'),      'Signup Last Name');
     this.btnLogin       = new AfButton(by.id('afLoginFormSubmit'),      'Login Form Submit');
+
+    this.checkBoxTerms = function () {
+        return element(by.xpath("//input[@type='checkbox']"));
+    };
 
     this.openSignUpPage = function() {
         browser.get('/signup');
