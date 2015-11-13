@@ -1,17 +1,17 @@
 "use strict";
 
 var co = require('co');
-var mongo = require('./config/mongo');
+var mongo = require('./../config/mongo');
 var _ = require('lodash');
-var constants = require('./business-logic/constants');
+var constants = require('.//businessLogic.js');
 
 co(function *() {
     yield mongo.connect();
 
-    var UserSchema = require('./models/user.js').model('User');
-    var ContributionSchema = require('./models/contribution').model('Contribution');
-    var PlatformSchema = require('./models/platform').model('Platform');
-    var InvestmentSchema = require('./models/investment').model('Investment');
+    var UserSchema = require('./../models/user.js').model('User');
+    var ContributionSchema = require('./../models/contribution').model('Contribution');
+    var PlatformSchema = require('./../models/platform').model('Platform');
+    var InvestmentSchema = require('./../models/investment').model('Investment');
 
     var userId = new mongo.ObjectId('555cb819c6e3ee0300b63876');
     var user = yield UserSchema.findOne({_id: userId});

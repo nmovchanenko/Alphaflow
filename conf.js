@@ -40,7 +40,7 @@ exports.config = {
      webdriver.chrome.driver. If null, Selenium will
      attempt to find ChromeDriver using PATH.
     */
-     chromeDriver: './core/resources/selenium/chromedriver',
+     chromeDriver: './node_modules/protractor/selenium/chromedriver',
 
      /**---- 2. To connect to a Selenium Server which is already running ----------
      The address of a running Selenium Server. If specified, Protractor will
@@ -87,7 +87,7 @@ exports.config = {
      Spec patterns are relative to the location of this config.
     */
      specs: [
-         'tests/*.js'
+         'tests/IncorrectPasswordCheck.js'
     ],
 
     /**
@@ -119,7 +119,7 @@ exports.config = {
      In addition, you may specify count, shardTestFiles, and maxInstances.
     */
      capabilities: {
-        browserName: 'chrome',
+        browserName: 'firefox',
 
          'chromeOptions': {
              'args': [

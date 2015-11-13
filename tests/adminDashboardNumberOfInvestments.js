@@ -1,15 +1,15 @@
 "use strict";
 
 var co = require('co');
-var mongo = require('./config/mongo');
+var mongo = require('./../config/mongo');
 var _ = require('lodash');
-var constants = require('./business-logic/constants');
+var constants = require('././constants');
 
 co(function *() {
     yield mongo.connect();
 
     var ObjectId = mongo.ObjectId;
-    var InvestmentSchema = require('./models/investment').model('Investment');
+    var InvestmentSchema = require('./../models/investment').model('Investment');
     var numberOfTotalInvestments =  yield InvestmentSchema.find({
         platform: {
             $in: [new ObjectId("55550708f7673300f45816b1"),

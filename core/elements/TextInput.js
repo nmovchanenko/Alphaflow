@@ -24,4 +24,12 @@ TextInput.prototype.clear = function() {
     });
 };
 
+TextInput.prototype.clearAndTypeText = function(text) {
+    var descr = this.elementDescription;
+    this.webElement.clear();
+    this.webElement.sendKeys(text).then(function() {
+        logger.info(descr + ': typed \'' + text + '\'');
+    });
+};
+
 module.exports = TextInput;
