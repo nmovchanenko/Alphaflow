@@ -7,8 +7,8 @@ describe('Real Estate - Investment Dashboard', function() {
     var sidebar     = new Sidebar(),
         realEstate  = new RealEstatePage();
 
-    beforeEach(function() {
-        console.log('\n');
+    beforeAll(function () {
+        logger.info('------------ Test started ------------');
     });
 
     it('User name should be displayed ', function() {

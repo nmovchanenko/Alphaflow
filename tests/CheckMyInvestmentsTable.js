@@ -250,6 +250,11 @@ describe('Real Estate - Investment Dashboard', function() {
     }
     ];
 
+
+    beforeAll(function () {
+        logger.info('------------ Test started ------------');
+    });
+
     it('should open Real Estate page', function() {
         base.openBogdanRealEstate(userData.validEmail, userData.validPass);
         realEstate.filterInvestmentsByPlatform(platforms.fundrise);

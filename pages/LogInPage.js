@@ -1,7 +1,7 @@
-var Button    = require('../core/elements/Button.js'),
+var Button      = require('../core/elements/Button.js'),
     TextInput   = require('../core/elements/TextInput.js'),
     TextBlock   = require('../core/elements/TextBlock.js'),
-    Link      = require('../core/elements/Link.js');
+    Link        = require('../core/elements/Link.js');
 
 var LogInPage = function() {
     this.txbEmail               = new TextInput(by.id('afEmail'),           'Email');

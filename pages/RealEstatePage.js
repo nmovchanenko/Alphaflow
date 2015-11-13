@@ -4,7 +4,7 @@ var BaseSteps   = require('../common/BaseSteps.js'),
     Link      = require('../core/elements/Link.js');
 
 var RealEstatePage = function() {
-    this.realEstatePageHeader   = new TextBlock(by.xpath('//h2'),                                       'Real Estate Header');
+    this.realEstatePageHeader   = new TextBlock(by.xpath('//h2').first,                                       'Real Estate Header');
     this.lnkGoNextPage          = new TextBlock(by.xpath('//a[@title=\'Go to the next page\']/span'),   'Go to the next page');
     this.nextPage               = new Link(by.xpath('//a[@title=\'Go to the next page\']'));
     this.btnPlatformList        = new Button(by.xpath('//span[@data-field=\'platformName\']//div'),     'Show Platforms');

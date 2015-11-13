@@ -23,13 +23,11 @@
     "selenium-webdriver": "2.45.1",
     "log4js": "^0.6.26",
     "protractor-jasmine2-html-reporter": "0.0.5",
-    "bcrypt": "^0.8.5",
     "co": "^3.1.0",
     "kongo": "0.0.7",
     "lodash": "^3.10.1",
     "mongodb": "~2.0.46",
     "mongoose": "^4.2.3",
-    "mysql": "^2.9.0",
-    "protractor-html-screenshot-reporter": "^0.0.21"
+    "nconf": "0.8.0"
   }
 }

@@ -7,6 +7,7 @@ describe('Incorrect password during sign up check', function(){
         randomUtils = new RandomUtils();
 
     beforeAll(function () {
+        logger.info('------------ Test started ------------');
         signUpPage.openSignUpPage();
     });
 
