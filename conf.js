@@ -87,7 +87,7 @@ exports.config = {
      Spec patterns are relative to the location of this config.
     */
      specs: [
-         'tests/IncorrectPasswordCheck.js'
+         'tests/*.js'
     ],
 
     /**
