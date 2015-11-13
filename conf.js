@@ -21,7 +21,7 @@ exports.config = {
      Server is found, this will default to
      node_modules/protractor/selenium/selenium-server...
     */
-     seleniumServerJar: null,
+     seleniumServerJar: null ,
 
      /**The port to start the Selenium Server on, or null if the server should
      find its own unused port. Ignored if seleniumServerJar is null.
