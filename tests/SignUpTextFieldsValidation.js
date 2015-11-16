@@ -4,6 +4,10 @@ var SignUpPage  = require('../pages/SignUpPage.js'),
 describe('SignUp page', function() {
     var signUpPage = new SignUpPage();
 
+    beforeAll(function () {
+        logger.info('------------ Test started ------------');
+    });
+
     it('should contain Email regexp validation', function() {
         signUpPage.openSignUpPage();
         expect(signUpPage.txbEmail.getAttribute('ng-pattern')).toEqual(data.email);

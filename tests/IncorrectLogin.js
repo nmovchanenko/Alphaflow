@@ -2,6 +2,11 @@ var LogInPage   = require('../pages/LogInPage.js'),
     userData    = require('../resources/users.json');
 
 describe('Login page', function() {
+
+    beforeAll(function () {
+        logger.info('------------ Test started ------------');
+    });
+
     it('should display validation message', function() {
         var logInPage = new LogInPage();
 
@@ -10,6 +15,6 @@ describe('Login page', function() {
         logInPage.txbPassword.typeText(userData.user1Pass);
         logInPage.btnLogin.click();
 
-        expect(logInPage.getValidationMessage()).toEqual('Invalid email or password was passed.');
+        expect(logInPage.getValidationMessage()).toEqual('Invalid email or password was passed');
     });
 });

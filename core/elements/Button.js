@@ -11,7 +11,8 @@ Button.prototype.constructor = Button;
 Button.prototype.click = function() {
     var descr = this.elementDescription;
         this.webElement.click().then(function() {
-            logger.info(descr + ': clicked');
+            //logger.info(descr + ': clicked');
+            logger.info("%s: clicked", descr);
         }, function(err){
             throw new CustomError(err.message);
         })
