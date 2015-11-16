@@ -1,5 +1,5 @@
-var mongoose    = require('mongoose'),
-    config      = require('../../config');
+var mongoose    = require('mongoose');
+    //config      = require('../../config');
 
 var db = mongoose.connection;
 
@@ -34,6 +34,6 @@ db.once('open', function() {
 
 });
 
-mongoose.connect(config.get('mongoose:uri'));
+//mongoose.connect(config.get('mongoose:uri'));
 
 module.exports = mongoose;
