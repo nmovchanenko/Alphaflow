@@ -2,8 +2,6 @@
 
 var co = require('co');
 var mongo = require('./../config/mongo');
-var _ = require('lodash');
-var constants = require('././constants');
 
 co(function *() {
     yield mongo.connect();

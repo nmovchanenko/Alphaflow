@@ -6,7 +6,7 @@
 
 var path = require('path'),
     _ = require('lodash'),
-    constants = require("./businessLogic.js")
+    constants = require("../constants/businessLogic.js")
   ;
 
 String.prototype.initCap = function () {

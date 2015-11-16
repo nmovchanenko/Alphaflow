@@ -3,7 +3,7 @@
 var co = require('co');
 var mongo = require('./../config/mongo');
 var _ = require('lodash');
-var constants = require('./constants/businessLogic').model('investmentAssetClassEnum');
+var constants = require('../constants/businessLogic');
 
 co(function *() {
     yield mongo.connect();
