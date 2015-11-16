@@ -15,6 +15,6 @@ describe('Login page', function() {
         logInPage.txbPassword.typeText(userData.user1Pass);
         logInPage.btnLogin.click();
 
-        expect(logInPage.getValidationMessage()).toEqual('Invalid email or password was passed');
+        expect(logInPage.getValidationMessage()).toEqual('Invalid email or password was passed.');
     });
 });
