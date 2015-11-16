@@ -1,75 +1,317 @@
-/*
- For using HtmlReporter install 'protractor-html-screenshot-reporter' module in project folder:
- npm install protractor-html-screenshot-reporter
- */
-
-var HtmlReporter = require('protractor-html-screenshot-reporter');
-var path = require('path');
-var reporter = new HtmlReporter({
-    baseDirectory: 'report/screenshots',
-    takeScreenShotsOnlyForFailedSpecs: true,
-    takeScreenShotsForSkippedSpecs: true,
-    pathBuilder: function pathBuilder(spec, descriptions, results, capabilities) {
-
-        var monthMap = {
-            "1": "Jan",
-            "2": "Feb",
-            "3": "Mar",
-            "4": "Apr",
-            "5": "May",
-            "6": "Jun",
-            "7": "Jul",
-            "8": "Aug",
-            "9": "Sep",
-            "10": "Oct",
-            "11": "Nov",
-            "12": "Dec"
-        };
-
-        var currentDate = new Date(),
-            currentHoursIn24Hour = currentDate.getHours(),
-            currentTimeInHours = currentHoursIn24Hour>12? currentHoursIn24Hour-12: currentHoursIn24Hour,
-            totalDateString = currentDate.getDate()+'-'+ monthMap[currentDate.getMonth()+1]+ '-'+(currentDate.getYear()+1900);
-                //+ '-'+ currentTimeInHours+'h-' + currentDate.getMinutes()+'m';
-
-        return path.join(totalDateString,capabilities.caps_.browserName, descriptions.join('-'));
-    }
-});
-
+// Reference Configuration File
 exports.config = {
-    seleniumAddress: 'http://192.168.88.130:4444/wd/hub',
+     /**---------------------------------------------------------------------------
+     ----- How to connect to Browser Drivers -----------------------------------
+     ---------------------------------------------------------------------------
 
-    //specs: ['tests/*.js'],
-    specs: ['tests/CheckMyInvestmentsTable.js'],
+     Protractor needs to know how to connect to Drivers for the browsers
+     it is testing on. This is usually done through a Selenium Server.
+     There are four options - specify one of the following:
 
-    baseUrl: 'http://qa.alphaflow.com',
+     1. seleniumServerJar - to start a standalone Selenium Server locally.
+     2. seleniumAddress - to connect to a Selenium Server which is already
+        running.
+     3. sauceUser/sauceKey - to use remote Selenium Servers via Sauce Labs.
+     4. directConnect - to connect directly to the browser Drivers.
+        This option is only available for Firefox and Chrome.
 
-    capabilities: {
-        'browserName': 'firefox',
-        'chromeOptions': {
-            'args': ['disable-extensions', 'start-maximized', 'enable-crash-reporter-for-testing']
+     ---- 1. To start a standalone Selenium Server locally ---------------------
+     The location of the standalone Selenium Server jar file, relative
+     to the location of this config. If no other method of starting Selenium
+     Server is found, this will default to
+     node_modules/protractor/selenium/selenium-server...
+    */
+     seleniumServerJar: null,
+
+     /**The port to start the Selenium Server on, or null if the server should
+     find its own unused port. Ignored if seleniumServerJar is null.
+    */
+     seleniumPort: null,
+
+     /**Additional command line options to pass to selenium. For example,
+     if you need to change the browser timeout, use
+     seleniumArgs: ['-browserTimeout=60']
+     Ignored if seleniumServerJar is null.
+    */
+     seleniumArgs: [],
+
+     /**ChromeDriver location is used to help find the chromedriver binary.
+     This will be passed to the Selenium jar as the system property
+     webdriver.chrome.driver. If null, Selenium will
+     attempt to find ChromeDriver using PATH.
+    */
+     chromeDriver: './core/resources/selenium/chromedriver',
+
+     /**---- 2. To connect to a Selenium Server which is already running ----------
+     The address of a running Selenium Server. If specified, Protractor will
+     connect to an already running instance of Selenium. This usually looks like
+     seleniumAddress: 'http://localhost:4444/wd/hub'
+    */
+     seleniumAddress: null,
+
+     /**---- 3. To use remote browsers via Sauce Labs -----------------------------
+     If sauceUser and sauceKey are specified, seleniumServerJar will be ignored.
+     The tests will be run remotely using Sauce Labs.
+    */
+     sauceUser: null,
+     sauceKey: null,
+
+     /**Use sauceAgent if you need customize agent for https connection to
+     saucelabs.com (i.e. your computer behind corporate proxy)
+    */
+     sauceAgent: null,
+
+     /**Use sauceSeleniumAddress if you need to customize the URL Protractor
+     uses to connect to sauce labs (for example, if you are tunneling selenium
+     traffic through a sauce connect tunnel). Default is
+     ondemand.saucelabs.com:80/wd/hub
+    */
+     sauceSeleniumAddress: null,
+
+     /**---- 4. To connect directly to Drivers ------------------------------------
+     Boolean. If true, Protractor will connect directly to the browser Drivers
+     at the locations specified by chromeDriver and firefoxPath. Only Chrome
+     and Firefox are supported for direct connect.
+    */
+     directConnect: false,
+
+     /**Path to the firefox application binary. If null, will attempt to find
+     firefox in the default locations.
+    */
+     firefoxPath: null,
+
+     /**---------------------------------------------------------------------------
+     ----- What tests to run ---------------------------------------------------
+     ---------------------------------------------------------------------------
+
+     Spec patterns are relative to the location of this config.
+    */
+     specs: [
+         'tests/*.js'
+    ],
+
+    /**
+     * Patterns to exclude.
+    */
+    exclude: [],
+
+     /**Alternatively, suites may be used. When run without a command line
+     parameter, all suites will run. If run with --suite=smoke or
+     --suite=smoke,full only the patterns matched by the specified suites will
+     run.
+    */
+     suites: {
+        //smoke: 'tests/smoke/*.js',
+        full: 'tests/*.js'
+    },
+
+     /**---------------------------------------------------------------------------
+     ----- How to set up browsers ----------------------------------------------
+     ---------------------------------------------------------------------------
+
+     Protractor can launch your tests on one or more browsers. If you are
+     testing on a single browser, use the capabilities option. If you are
+     testing on multiple browsers, use the multiCapabilities array.
+
+     For a list of available capabilities, see
+     https://github.com/SeleniumHQ/selenium/wiki/DesiredCapabilities
+
+     In addition, you may specify count, shardTestFiles, and maxInstances.
+    */
+     capabilities: {
+        browserName: 'chrome',
+
+         'chromeOptions': {
+             'args': [
+                 //'incognito',
+                 'disable-extensions', 'start-maximized', 'enable-crash-reporter-for-testing', '--user-data-dir=D:\\Workspace\\User_Data']
         },
-        'loggingPrefs': {
-            'browser': 'ALL'
+
+        // Name of the process executing this capability.  Not used directly by
+        // protractor or the browser, but instead pass directly to third parties
+        // like SauceLabs as the name of the job running this test
+        name: 'Unnamed Job',
+
+        // User defined name for the capability that will display in the results log
+        // Defaults to the browser name
+        logName: 'Chrome - English',
+
+        // Number of times to run this set of capabilities (in parallel, unless
+        // limited by maxSessions). Default is 1.
+        count: 1,
+
+        // If this is set to be true, specs will be sharded by file (i.e. all
+        // files to be run by this set of capabilities will run in parallel).
+        // Default is false.
+        shardTestFiles: false,
+
+        // Maximum number of browser instances that can run in parallel for this
+        // set of capabilities. This is only needed if shardTestFiles is true.
+        // Default is 1.
+        maxInstances: 1
+    },
+
+     /**If you would like to run more than one instance of WebDriver on the same
+     tests, use multiCapabilities, which takes an array of capabilities.
+     If this is specified, capabilities will be ignored.
+    */
+     multiCapabilities: [],
+
+     /**If you need to resolve multiCapabilities asynchronously (i.e. wait for
+     server/proxy, set firefox profile, etc), you can specify a function here
+     which will return either `multiCapabilities` or a promise to
+     `multiCapabilities`.
+     If this returns a promise, it is resolved immediately after
+     `beforeLaunch` is run, and before any driver is set up.
+     If this is specified, both capabilities and multiCapabilities will be
+     ignored.
+    */
+     getMultiCapabilities: null,
+
+     /**Maximum number of total browser sessions to run. Tests are queued in
+     sequence if number of browser sessions is limited by this parameter.
+     Use a number less than 1 to denote unlimited. Default is unlimited.
+    */
+     maxSessions: -1,
+
+     /**---------------------------------------------------------------------------
+     ----- Global test information ---------------------------------------------
+     ---------------------------------------------------------------------------
+
+     A base URL for your application under test. Calls to protractor.get()
+     with relative paths will be prepended with this.
+    */
+     baseUrl: 'http://qa.alphaflow.com',
+
+     /**CSS Selector for the element housing the angular app - this defaults to
+     body, but is necessary if ng-app is on a descendant of <body>.
+    */
+     rootElement: 'body',
+
+     /**The timeout in milliseconds for each script run on the browser. This should
+     be longer than the maximum time your application needs to stabilize between
+     tasks.
+    */
+     allScriptsTimeout: 500000,
+
+     /**
+      * How long to wait for a page to load.
+    */
+     getPageTimeout: 500000,
+
+     /**A callback function called once configs are read but before any environment
+     setup. This will only run once, and before onPrepare.
+     You can specify a file containing code to run by setting beforeLaunch to
+     the filename string.
+    */
+     beforeLaunch: function() {
+        // At this point, global variable 'protractor' object will NOT be set up,
+        // and globals from the test framework will NOT be available. The main
+        // purpose of this function should be to bring up test dependencies.
+    },
+
+     /**A callback function called once protractor is ready and available, and
+     before the specs are executed.
+     If multiple capabilities are being run, this will run once per
+     capability.
+     You can specify a file containing code to run by setting onPrepare to
+     the filename string.
+    */
+     onPrepare: function() {
+         var Logger          = require('./core/logger/CustomLogger.js'),
+             Command         = require('./core/commands/CustomCommands.js'),
+             BaseSteps       = require('./common/BaseSteps.js'),
+             HtmlReporter    = require('./core/reporters/HtmlReporter.js');
+
+         global.step     = new BaseSteps();
+         global.logger   = Logger.getCustomLogger();
+         global.perform  = new Command();
+
+         jasmine.getEnv().addReporter(HtmlReporter.getReporter());
+    },
+
+     /**
+      * A callback function called once tests are finished.
+    */
+     onComplete: function() {
+        // At this point, tests will be done but global objects will still be
+        // available.
+    },
+
+     /**A callback function called once the tests have finished running and
+     the WebDriver instance has been shut down. It is passed the exit code
+     (0 if the tests passed). This is called once per capability.
+    */
+     onCleanUp: function(exitCode) {},
+
+     /**A callback function called once all tests have finished running and
+     the WebDriver instance has been shut down. It is passed the exit code
+     (0 if the tests passed). This is called only once before the program
+     exits (after onCleanUp).
+    */
+     afterLaunch: function() {},
+
+     /**The params object will be passed directly to the Protractor instance,
+     and can be accessed from your test as browser.params. It is an arbitrary
+     object and can contain anything you may need in your test.
+     This can be changed via the command line as:
+       --params.login.user "Joe"
+    */
+     params: {
+        login: {
+            user: 'Jane',
+            password: '1234'
         }
     },
 
-    onPrepare: function() {
-        //browser.driver.manage().window().setSize(1920, 1080);
-        // Add a screenshot reporter:
-        jasmine.getEnv().addReporter(reporter);
+     /**If true, protractor will restart the browser between each test.
+     CAUTION: This will cause your tests to slow down drastically.
+    */
+     restartBrowserBetweenTests: false,
+
+     /**Protractor will track outstanding $timeouts by default, and report them in
+     the error message if Protractor fails to synchronize with Angular in time.
+     In order to do this Protractor needs to decorate $timeout.
+     CAUTION: If your app decorates $timeout, you must turn on this flag. This
+     is false by default.
+    */
+     untrackOutstandingTimeouts: false,
+
+     /**---------------------------------------------------------------------------
+     ----- The test framework --------------------------------------------------
+     ---------------------------------------------------------------------------
+
+     Test framework to use. This may be one of:
+     jasmine, cucumber, mocha or custom.
+
+     When the framework is set to "custom" you'll need to additionally
+     set frameworkPath with the path relative to the config file or absolute
+      framework: 'custom',
+      frameworkPath: './frameworks/my_custom_jasmine.js',
+     See github.com/angular/protractor/blob/master/lib/frameworks/README.md
+     to comply with the interface details of your custom implementation.
+
+     Jasmine is fully supported as test and assertion frameworks.
+     Mocha and Cucumber have limited support. You will need to include your
+     own assertion framework (such as Chai) if working with Mocha.
+    */
+     framework: 'jasmine2',
+
+     /**Options to be passed to jasmine.
+     See https://github.com/jasmine/jasmine-npm/blob/master/lib/jasmine.js
+     for the exact options available.
+    */
+     jasmineNodeOpts: {
+         // If true, print colors to the terminal.
+         showColors: true,
+         // If true, include stack traces in failures.
+         includeStackTrace: false,
+         // Default time to wait in ms before a test fails.
+         defaultTimeoutInterval: 500000
     },
 
-    jasmineNodeOpts: {
-        // onComplete will be called just before the driver quits.
-        onComplete: null,
-        // If true, display spec names.
-        isVerbose: false,
-        // If true, print colors to the terminal.
-        showColors: true,
-        // If true, include stack traces in failures.
-        includeStackTrace: true,
-        // Default time to wait in ms before a test fails.
-        defaultTimeoutInterval: 240000
-    }
+     /**
+      * See docs/plugins.md
+    */
+     plugins: []
 };

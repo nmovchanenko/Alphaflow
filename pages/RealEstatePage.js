@@ -1,16 +1,16 @@
-var BaseOperations = require('../common/BaseOperations.js');
-var base = new BaseOperations();
+var BaseSteps   = require('../common/BaseSteps.js'),
+    TextBlock   = require('../core/elements/TextBlock.js'),
+    Button    = require('../core/elements/Button.js'),
+    Link      = require('../core/elements/Link.js');
 
 var RealEstatePage = function() {
-    var realEstatePageHeader = element(by.xpath('//h2[contains(text(),\'Real Estate - Investment Dashboard\')]'));
-    /* My Investments table: */
-    var lnkGoNextPage = element(by.xpath('//a[@title=\'Go to the next page\']/span'));
-    var nextPage = element(by.xpath('//a[@title=\'Go to the next page\']'));
-    // filters
-    var btnPlatformList = element(by.xpath('//span[@data-field=\'platformName\']//div'));
+    this.realEstatePageHeader   = new TextBlock(by.xpath('//h2').first,                                       'Real Estate Header');
+    this.lnkGoNextPage          = new TextBlock(by.xpath('//a[@title=\'Go to the next page\']/span'),   'Go to the next page');
+    this.nextPage               = new Link(by.xpath('//a[@title=\'Go to the next page\']'));
+    this.btnPlatformList        = new Button(by.xpath('//span[@data-field=\'platformName\']//div'),     'Show Platforms');
 
     this.filterInvestmentsByPlatform = function(platform) {
-        btnPlatformList.click();
+        this.btnPlatformList.click();
         element(by.xpath('//li[contains(text(),\'' + platform + '\')]')).click();
     };
 
@@ -71,16 +71,122 @@ var RealEstatePage = function() {
 
     this.hasNextPage = function() {
         browser.executeScript("document.getElementsByClassName('k-pager-wrap k-grid-pager k-widget k-floatwrap')[0].scrollIntoView();");
-        return nextPage.getAttribute('class') == "k-link k-pager-nav";
+        return this.nextPage.getAttribute('class') == "k-link k-pager-nav";
     };
 
     this.clickNextPage = function () {
-        lnkGoNextPage.click();
+        this.lnkGoNextPage.click();
     };
 
     this.getRealEstatePageHeader = function() {
-        return realEstatePageHeader.getText();
+        return this.realEstatePageHeader.getText();
     };
+
+    function readRow(rowNumber) {
+
+        return new Promise(function(resolve, reject) {
+            var investmentDataInRow = new Map();
+
+            var platformName = element(by.xpath('//tbody[@role=\'rowgroup\']/tr[' + rowNumber + ']//td[1]//div[@class=\'text-center\']'));
+            investmentDataInRow.set('platform', platformName.getWebElement().getAttribute('title'));
+
+            var investmentTitle = element(by.xpath('//tbody[@role=\'rowgroup\']/tr[' + rowNumber + ']//td[2]//a'));
+            investmentDataInRow.set('title', investmentTitle.getText());
+
+            var investmentType = element(by.xpath('//tbody[@role=\'rowgroup\']/tr[' + rowNumber + ']//td[3]//div[@class=\'text-center ng-binding\']'));
+            investmentDataInRow.set('type', investmentType.getText());
+
+            var investedSum = element(by.xpath('//tbody[@role=\'rowgroup\']/tr[' + rowNumber + ']//td[4]//div[@class=\'text-center ng-binding\']'));
+            investmentDataInRow.set('invested', investedSum.getText().then(function (text) {return text.replace(/[$,]/g, "");}));
+
+            var investmentClass = element(by.xpath('//tbody[@role=\'rowgroup\']/tr[' + rowNumber + ']//td[5]//div[@class=\'text-center ng-binding\']'));
+            investmentDataInRow.set('class', investmentClass.getText());
+
+            var investmentSponsor = element(by.xpath('//tbody[@role=\'rowgroup\']/tr[' + rowNumber + ']//td[7]/div[@class=\'ng-binding\']'));
+            investmentDataInRow.set('sponsor', investmentSponsor.getText());
+
+            var investmentState = element(by.xpath('//tbody[@role=\'rowgroup\']/tr[' + rowNumber + ']//td[8]//div[@class=\'text-center ng-binding\']'));
+
+            var investmentStatus = element(by.xpath('//tbody[@role=\'rowgroup\']/tr[' + rowNumber + ']//td[9]//div[@class=\'text-center\']'));
+
+            var investmentPercentOfDollar = element(by.xpath('//tbody[@role=\'rowgroup\']/tr[' + rowNumber + ']//td[10]//div[@class=\'ng-binding\']'));
+
+            resolve(investmentDataInRow);
+        });
+    }
+
+    this.readInvestmentsOnPage = function() {
+
+        return new Promise(function(resolve, reject) {
+            // variable 'grid' contains rows, which are represented on the first page of Investment table
+            var grid = $$('tbody[role=\'rowgroup\']>tr');
+            // array index of 'dbData'
+            var index = 0;
+            var rowNumber = 1;
+
+            grid.each(function () {
+                describe('Investment table', function() {
+                    it('check each row', function () {
+                        // focus on the 'My Investments' table
+                        browser.executeScript("document.getElementsByClassName('k-grid-content')[0].scrollIntoView();");
+                        readRow(rowNumber).then(investmentMap => {
+                            expect(investmentMap.get('platform')).toEqual(dbData[index].platform);
+                            expect(investmentMap.get('title')).toEqual(dbData[index].title);
+
+                        });
+                        index++;
+                        rowNumber++;
+                    })
+                })
+            });
+
+            resolve(RealEstatePage.hasNextPage());
+        });
+
+    };
+
+    this.readTable = function() {
+        return new Promise(function(resole, reject) {
+            var tableData = new Map();
+            var pageAmount = getPageAmount();
+
+            pageAmount.each(function() {
+                readPage().then(map => {
+                    tableData.set('platform', map.get(0));
+                    tableData.set('title', map.get(1));
+                })
+            });
+
+            resole(tableData);
+        });
+    };
+
+    function getRowAmount() {
+        return element.all(by.xpath('//tbody[@role=\'rowgroup\']/tr')).count();
+    }
+
+    function getPageAmount() {
+        return element(by.xpath('//a[@title=\'Go to the last page\']')).getAttribute('data-page');
+    }
+
+    function readPage() {
+        return new Promise(function(resolve, reject){
+            var dataMap = new Map();
+            var rows = $$('tbody[role=\'rowgroup\']>tr');
+            var rowNumber = 1;
+
+            rows.each(function() {
+                readRow(rowNumber).then(map => {
+                    dataMap.set('platform', map.get(0));
+                    dataMap.set('title', map.get(1));
+                });
+                rowNumber++;
+            });
+
+            resolve(dataMap);
+        })
+    }
+
 
 };
 module.exports = RealEstatePage;

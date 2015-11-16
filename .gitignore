@@ -2,3 +2,5 @@ test-conf.js
 .idea/
 node_modules/
 report/
+forms/
+core/resources/selenium/

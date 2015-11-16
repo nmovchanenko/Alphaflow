@@ -1,7 +1,11 @@
-var NavigationBar = require('../forms/NavigationBar.js');
+var NavigationBar = require('../pages/components/NavigationBar.js');
 
 describe('Navigation Bar', function() {
     var navigationBar = new NavigationBar();
+
+    beforeAll(function () {
+        logger.info('------------ Test started ------------');
+    });
 
     it('Home link', function() {
         browser.get('/');

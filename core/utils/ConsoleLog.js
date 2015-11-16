@@ -35,7 +35,7 @@ var timestampToDate = function (unix_timestamp) {
 
 afterEach(function () {
     // Replace all space characters in spec name with dashes
-    var specName = jasmine.getEnv().currentSpec.description.replace(new RegExp(' ', 'g'), '-'),
+    var specName = jasmine.getEnv().currentSpec.elementDescription.replace(new RegExp(' ', 'g'), '-'),
         baseFileName = specName + '-' + getDateStr(),
         reportDir = path.resolve(__dirname + '/../report/'),
         consoleLogsDir = path.resolve(reportDir + '/logs/')

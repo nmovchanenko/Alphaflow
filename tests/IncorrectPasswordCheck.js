@@ -1,33 +1,31 @@
-var SignUpPage = require('../pages/SignUpPage.js');
-var RandomUtils = require('../utils/RandomUtils.js');
+var SignUpPage  = require('../pages/SignUpPage.js'),
+    RandomUtils = require('../core/utils/RandomUtils.js');
 
 describe('Incorrect password during sign up check', function(){
-    var signUpPage = new SignUpPage();
-    var randomUtilss = new RandomUtils();
+    var signUpPage  = new SignUpPage(),
+        randomUtils = new RandomUtils();
+
+    beforeAll(function () {
+        logger.info('------------ Test started ------------');
+        signUpPage.openSignUpPage();
+    });
 
     it('Password cannot be less than 8 chars', function(){
-        signUpPage.openSignUpPage();
-
-        var password = "B" + randomUtilss.randomizeString(5) + "1";
-        signUpPage.setPassword(password);
+        var password = "B" + randomUtils.randomizeString(5) + "1";
+        signUpPage.txbPassword.typeText(password);
 
         expect(signUpPage.gerErrorOfIncorrectPassword()).toEqual(signUpPage.getErrorMessages().incorrectPassword);
     });
 
     it('Password should contain at least one UpperCase char', function() {
-        signUpPage.openSignUpPage();
-
-        var password = randomUtilss.randomizeString(7).toLowerCase() + "1";
-        signUpPage.setPassword(password);
-        browser.pause();
+        var password = randomUtils.randomizeString(7).toLowerCase() + "1";
+        signUpPage.txbPassword.typeText(password);
         expect(signUpPage.gerErrorOfIncorrectPassword()).toEqual(signUpPage.getErrorMessages().incorrectPassword);
     });
 
     it('Password should contain at least one numeric char', function() {
-        signUpPage.openSignUpPage();
-
-        var password = randomUtilss.randomizeAlphaString(7).toLowerCase() + "B";
-        signUpPage.setPassword(password);
+        var password = randomUtils.randomizeAlphaString(7).toLowerCase() + "B";
+        signUpPage.txbPassword.typeText(password);
 
         expect(signUpPage.gerErrorOfIncorrectPassword()).toEqual(signUpPage.getErrorMessages().incorrectPassword);
     });

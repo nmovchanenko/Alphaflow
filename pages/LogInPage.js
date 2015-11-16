@@ -1,33 +1,20 @@
+var Button      = require('../core/elements/Button.js'),
+    TextInput   = require('../core/elements/TextInput.js'),
+    TextBlock   = require('../core/elements/TextBlock.js'),
+    Link        = require('../core/elements/Link.js');
+
 var LogInPage = function() {
-    var emailTextField = element(by.id('afEmail'));
-    var passwordTextField = element(by.id('afPassword'));
-    var logInButton = element(by.id('afLoginFormSubmit'));
-    var validationMessage = element(by.xpath('//div[1]/div/p'));
+    this.txbEmail               = new TextInput(by.id('afEmail'),           'Email');
+    this.txbPassword            = new TextInput(by.id('afPassword'),        'Password');
+    this.btnLogin               = new Button(by.id('afLoginFormSubmit'),    'Login');
+    this.divValidationMessage   = new TextBlock(by.css('.alert.alert-danger.ng-binding'));
 
     this.openLoginPage = function() {
         browser.get('/login');
     };
 
-    this.typeEmail = function(email) {
-        emailTextField.sendKeys(email);
-    };
-
-    this.typePassword = function(password) {
-        passwordTextField.sendKeys(password);
-    };
-
-    this.clickLogin = function() {
-        logInButton.click();
-    };
-
-    this.loginAs = function(email, password) {
-        emailTextField.sendKeys(email);
-        passwordTextField.sendKeys(password);
-        logInButton.click();
-    };
-
     this.getValidationMessage = function() {
-        return validationMessage.getText();
+        return this.divValidationMessage.getText();
     };
 
 };
