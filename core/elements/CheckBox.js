@@ -20,7 +20,7 @@ CheckBox.prototype.check = function() {
     var descr = this.elementDescription;
     if(!this.isChecked())
     {
-        this.webElement.click().Then(function(){
+        this.webElement.click().then(function(){
             logger.info(descr + ': checked.');
         });
     };
@@ -31,7 +31,7 @@ CheckBox.prototype.uncheck = function() {
     var descr = this.elementDescription;
     if(webElement.isChecked())
     {
-        this.webElement.click().Then(function(){
+        this.webElement.click().then(function(){
             logger.info(descr + ': unchecked.');
         });
     };

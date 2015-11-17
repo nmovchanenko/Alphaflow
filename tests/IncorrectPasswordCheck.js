@@ -15,7 +15,6 @@ describe('Incorrect password during sign up check', function(){
         var password = "B" + randomUtils.randomizeString(5) + "1";
         signUpPage.txbPassword.typeText(password);
 
-        console.log(signUpPage.errorIncorrectPassword.getText());
         expect(signUpPage.errorIncorrectPassword.getText()).toEqual(ErrorMessages.errorMessagesEnum['incorrectPassword']);
 
     });
