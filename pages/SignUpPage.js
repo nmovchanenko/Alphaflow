@@ -13,7 +13,7 @@ var SignUpPage = function() {
     this.txbFirstName   = new TextInput(by.id('afSignupFirstName'),     'Signup First Name');
     this.txbLastName    = new TextInput(by.id('afSignupLastName'),      'Signup Last Name');
     this.btnLogin       = new Button(by.id('afLoginFormSubmit'),        'Login Form Submit');
-
+    this.signUpButton = new Button(by.css('.submit'),                    'Sign Up Form Submit');
     this.checkBoxTerms = new CheckBox(by.xpath("//input[@type='checkbox']"), 'Accept terms and conditions checkbox');
     this.userRegistredMessage = new TextBlock(by.css(".alert-success"),   'User sucessfully registered message');
     this.errorIncorrectPassword = new TextBlock(by.xpath("//p[contains(@ng-show, 'afSignupPassword.$invalid')]"), 'Incorrect password error message');
