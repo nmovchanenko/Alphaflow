@@ -131,7 +131,5 @@ var BasePage = function() {
         });
     };
 
-    //TODO: checkForAngular()
-
 };
 module.exports = new BasePage;

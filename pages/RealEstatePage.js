@@ -1,13 +1,13 @@
-var BaseSteps   = require('../common/BaseSteps.js'),
-    TextBlock   = require('../core/elements/TextBlock.js'),
+var BaseSteps = require('../common/BaseSteps.js'),
+    TextBlock = require('../core/elements/TextBlock.js'),
     Button    = require('../core/elements/Button.js'),
     Link      = require('../core/elements/Link.js');
 
 var RealEstatePage = function() {
-    this.realEstatePageHeader   = new TextBlock(by.xpath('//h2').first,                                       'Real Estate Header');
-    this.lnkGoNextPage          = new TextBlock(by.xpath('//a[@title=\'Go to the next page\']/span'),   'Go to the next page');
+    this.realEstatePageHeader   = new TextBlock(by.xpath('//h2').first, 'Real Estate Header');
+    this.lnkGoNextPage          = new TextBlock(by.xpath('//a[@title=\'Go to the next page\']/span'), 'Go to the next page');
     this.nextPage               = new Link(by.xpath('//a[@title=\'Go to the next page\']'));
-    this.btnPlatformList        = new Button(by.xpath('//span[@data-field=\'platformName\']//div'),     'Show Platforms');
+    this.btnPlatformList        = new Button(by.xpath('//span[@data-field=\'platformName\']//div'), 'Show Platforms');
 
     this.filterInvestmentsByPlatform = function(platform) {
         this.btnPlatformList.click();
@@ -171,8 +171,8 @@ var RealEstatePage = function() {
 
     function readPage() {
         return new Promise(function(resolve, reject){
-            var dataMap = new Map();
-            var rows = $$('tbody[role=\'rowgroup\']>tr');
+            var dataMap   = new Map();
+            var rows      = $$('tbody[role=\'rowgroup\']>tr');
             var rowNumber = 1;
 
             rows.each(function() {

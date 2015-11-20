@@ -1,4 +1,6 @@
 // Reference Configuration File
+var conf = require('nconf');
+
 exports.config = {
      /**---------------------------------------------------------------------------
      ----- How to connect to Browser Drivers -----------------------------------
@@ -181,7 +183,7 @@ exports.config = {
      A base URL for your application under test. Calls to protractor.get()
      with relative paths will be prepended with this.
     */
-     baseUrl: 'http://qa.alphaflow.com',
+     baseUrl: nconf.get(''), // get address
 
      /**CSS Selector for the element housing the angular app - this defaults to
      body, but is necessary if ng-app is on a descendant of <body>.
