@@ -1,6 +1,4 @@
-/**
- * Created by op on 12.11.15.
- */
+
 module.exports.errorMessagesEnum =
 {
         'incorrectPassword': 'Password field length should be at least 8 characters, contain at least one number and one uppercase letter.',

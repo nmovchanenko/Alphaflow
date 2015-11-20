@@ -1,7 +1,4 @@
-/**
- * Created by bogdan on 5/14/15.
- * Models the investment platform such as RealtyShares, etc
- */
+
 
 var mongoose = require('mongoose')
 

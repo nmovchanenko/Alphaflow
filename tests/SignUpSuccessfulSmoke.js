@@ -1,6 +1,6 @@
 var SignUpPage = require('../pages/SignUpPage.js'),
     RandomUtils = require('../core/utils/RandomUtils.js'),
-    ErrorMessages = require('../constants/errorMessages.js')
+    ErrorMessages = require('../constants/errorMessages.js');
 
     describe('Sign up with valid parameters should be successful', function() {
             var signUpPage = new SignUpPage;

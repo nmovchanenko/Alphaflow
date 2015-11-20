@@ -1,9 +1,4 @@
-/**
- * Created by bogdan on 5/14/15.
- * Models the investment opportunity such as "123 main st".
- * An investment can have one or more contributions.
- * An investment is made in only one offering
- */
+
 
 var mongoose = require('mongoose')
   , PlatformSchema = require('../models/platform.js').model('Platform')

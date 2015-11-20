@@ -1,8 +1,3 @@
-/**
- * Created by bogdan on 9/8/15.
- * Models user dashboard analytics, that is, pre-calculated stats & charts to avoid angular side real time computations
- * It is intended to be updated once an account syncs and then used for store & retrieve from client side (angular).
- */
 
 var mongoose = require('mongoose')
   , PlatformSchema = require('./platform.js')

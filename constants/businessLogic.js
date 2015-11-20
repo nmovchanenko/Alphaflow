@@ -1,6 +1,3 @@
-/**
- * Created by bogdan on 8/25/15.
- */
 
 module.exports.earningTypeEnum = {
   'Interest': 'Interest',

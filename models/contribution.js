@@ -1,9 +1,3 @@
-/**
- * Created by bogdan on 5/14/15.
- * Models a specific financial contribution into an investment
- * Generally the Investor (AI or II) will make a contribution into an investment,
- * it can be up to 100%, "whole note"
- */
 
 var mongoose = require('mongoose')
   , PlatformSchema = require('./platform.js')

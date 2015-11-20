@@ -1,4 +1,4 @@
-var AlphaflowHomepage = function() {
+var Homepage = function() {
     var signInLink = element(by.xpath('//li[5]/a'));
 
     this.openHomepage = function() {
@@ -9,4 +9,4 @@ var AlphaflowHomepage = function() {
         signInLink.click();
     }
 };
-module.exports = AlphaflowHomepage;
+module.exports = Homepage;
