@@ -5,5 +5,5 @@ report/
 forms/
 core/resources/selenium/
 models/
-constants/
 config/
+settings/

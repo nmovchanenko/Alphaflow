@@ -1,5 +1,4 @@
-// Reference Configuration File
-var conf = require('nconf');
+var config = require('./settings');
 
 exports.config = {
      /**---------------------------------------------------------------------------
@@ -42,7 +41,7 @@ exports.config = {
      webdriver.chrome.driver. If null, Selenium will
      attempt to find ChromeDriver using PATH.
     */
-     chromeDriver: './node_modules/protractor/selenium/chromedriver',
+     chromeDriver: './core/resources/selenium/chromedriver',
 
      /**---- 2. To connect to a Selenium Server which is already running ----------
      The address of a running Selenium Server. If specified, Protractor will
@@ -89,7 +88,7 @@ exports.config = {
      Spec patterns are relative to the location of this config.
     */
      specs: [
-         'tests/*.js'
+         'tests/IncorrectLogin.js'
     ],
 
     /**
@@ -121,7 +120,7 @@ exports.config = {
      In addition, you may specify count, shardTestFiles, and maxInstances.
     */
      capabilities: {
-        browserName: 'firefox',
+        browserName: 'chrome',
 
          'chromeOptions': {
              'args': [
@@ -183,7 +182,7 @@ exports.config = {
      A base URL for your application under test. Calls to protractor.get()
      with relative paths will be prepended with this.
     */
-     baseUrl: nconf.get(''), // get address
+     baseUrl: config.get('app:url'),
 
      /**CSS Selector for the element housing the angular app - this defaults to
      body, but is necessary if ng-app is on a descendant of <body>.
