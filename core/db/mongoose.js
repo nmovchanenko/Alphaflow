@@ -1,11 +1,10 @@
 var mongoose = require('mongoose');
 var config = require('../../settings');
 
-//var dbURI = config.get('mongoose:localhost');
+var dbURI = config.get('mongoose:uri');
 
 // Create the database connection
-mongoose.connect(config.get('mongoose:uri'));
-//mongoose.connect(dbURI);
+mongoose.connect(dbURI);
 
 mongoose.connection.on('connected', function () {
     console.log('Mongoose default connection open to ' + dbURI);
