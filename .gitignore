@@ -7,3 +7,4 @@ core/resources/selenium/
 models/
 config/
 settings/
+/resources/MongoData.json
