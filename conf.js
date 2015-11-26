@@ -41,7 +41,7 @@ exports.config = {
      webdriver.chrome.driver. If null, Selenium will
      attempt to find ChromeDriver using PATH.
     */
-     chromeDriver: './core/resources/selenium/chromedriver',
+     chromeDriver: null,
 
      /**---- 2. To connect to a Selenium Server which is already running ----------
      The address of a running Selenium Server. If specified, Protractor will
@@ -89,8 +89,8 @@ exports.config = {
     */
      specs: [
          //'tests/ReadFromDBTest.js',
-         //'tests/CalculateEarnings.js'
-            'tests/*.js'
+         'tests/CalculateEarnings.js'
+            //'tests/*.js'
     ],
 
     /**
@@ -133,7 +133,7 @@ exports.config = {
              'args': [
                  //'incognito',
                  'disable-extensions', 'start-maximized', 'enable-crash-reporter-for-testing'
-                 , '--user-data-dir=D:\\Workspace\\User_Data'
+                 //, '--user-data-dir=D:\\Workspace\\User_Data'
              ]
         },
 
