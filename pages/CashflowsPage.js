@@ -10,6 +10,7 @@ var Cashflows = function() {
 
     this.filterInvestmentsByCategory = function(category) {
         btnCategoryList.click();
+        perform.isVisible(element(by.xpath('//li[contains(text(),\'' + category + '\')]')));
         element(by.xpath('//li[contains(text(),\'' + category + '\')]')).click();
     };
 

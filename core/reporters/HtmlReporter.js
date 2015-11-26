@@ -7,6 +7,7 @@ var HtmlReporter = function () {
         return new ProtractorJasmineHtmlReporter({
             savePath: 'report/',
             screenshotsFolder: 'images',
+            takeScreenshotsOnlyOnFailures: true,
             consolidate: true,
             consolidateAll: true
         });
