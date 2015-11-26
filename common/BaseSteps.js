@@ -36,6 +36,15 @@ var BaseSteps = function() {
     };
 
     /**
+     * Open Real Estate - Cashflows (user must be logged in).
+     */
+    this.openCashflows = function () {
+        sidebar.lnkCashflows.click();
+        // this will wait Cashflows page to be loaded
+        browser.wait(condition.visibilityOf(element(by.xpath('//h2[contains(text(),\'Real Estate - Cashflows\')]'))), 15000);
+    };
+
+    /**
      * Log in with email and password and open Real Estate page.
      * @param email
      * @param password

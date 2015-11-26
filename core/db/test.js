@@ -1,13 +1,15 @@
-var Platform = require('./model/PlatformSchema.js'),
+var
 	User = require('./model/UserSchema.js'),
-	mongoose = require('./mongoose.js'),
-	co = require('co'),
-	config = require('../../settings');
+	co = require('co');
+
+require('./mongoose.js');
 
 co(function*() {
 
 	// test for local db
-	var user1 = yield User.find({'name.nickname': 'Test nickname'});
+	var user1 = yield User.find({'name.first': 'Evgenija'});
 
 	console.log(user1);
+
+	process.exit(0);
 })();

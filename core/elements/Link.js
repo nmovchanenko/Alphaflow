@@ -3,7 +3,6 @@
  */
 var BaseElement = require('./BaseElement.js');
 
-//-------------------------------------------------------------------------------------
 var Link = function (locator, description) {
     BaseElement.apply(this, arguments);
 };
@@ -13,8 +12,8 @@ Link.prototype.constructor = Link;
 
 Link.prototype.click = function() {
     var descr = this.elementDescription;
-    this.webElement.click().then(function() {
-        logger.info(descr + ': clicked');
+    return this.webElement.click().then(function() {
+        logger.info("Link %s :: click", descr);
     });
 };
 

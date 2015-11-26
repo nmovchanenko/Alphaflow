@@ -1,6 +1,3 @@
-/**
- * Created by mikalai.mauchanenka on 11.11.2015.
- */
 var ProtractorJasmineHtmlReporter = require('protractor-jasmine2-html-reporter');
 
 var HtmlReporter = function () {

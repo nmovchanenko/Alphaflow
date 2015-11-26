@@ -13,14 +13,14 @@ TextInput.prototype.constructor = TextInput;
 TextInput.prototype.typeText = function(text) {
     var descr = this.elementDescription;
     this.webElement.sendKeys(text).then(function() {
-        logger.info(descr + ': typed \'' + text + '\'');
+        logger.info("TextInput '%s' :: type text: '%s'", descr, text);
     });
 };
 
 TextInput.prototype.clear = function() {
     var descr = this.elementDescription;
     this.webElement.clear().then(function() {
-        logger.info(descr + ': cleared');
+        logger.info("TextInput '%s' :: cleared", descr);
     });
 };
 
@@ -28,7 +28,7 @@ TextInput.prototype.clearAndTypeText = function(text) {
     var descr = this.elementDescription;
     this.webElement.clear();
     this.webElement.sendKeys(text).then(function() {
-        logger.info(descr + ': typed \'' + text + '\'');
+        logger.info("TextInput '%s' :: type text: '%s'", descr, text);
     });
 };
 

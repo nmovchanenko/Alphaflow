@@ -14,7 +14,7 @@ TextBlock.prototype.constructor = TextBlock;
 BaseElement.prototype.getText = function() {
     var descr = this.elementDescription;
     return this.webElement.getText().then(function(result) {
-        logger.info(descr + ': got the text: ' + result);
+        logger.info("TextBlock %s :: get text: %s", descr, result);
         return result;
     }, function(err){
         throw new CustomError(err.message);

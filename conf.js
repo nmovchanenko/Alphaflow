@@ -88,13 +88,20 @@ exports.config = {
      Spec patterns are relative to the location of this config.
     */
      specs: [
-         'tests/IncorrectLogin.js'
+         //'tests/ReadFromDBTest.js',
+         //'tests/CalculateEarnings.js'
+            'tests/*.js'
     ],
 
     /**
      * Patterns to exclude.
     */
-    exclude: [],
+    exclude: [
+        'tests/adminDashboardNumberOfInvestments.js',
+        'tests/CollectEarningsByPlatform.js',
+        'tests/testEarningByType.js',
+        'tests/testEarningsByPlatform.js'
+    ],
 
      /**Alternatively, suites may be used. When run without a command line
      parameter, all suites will run. If run with --suite=smoke or
@@ -125,7 +132,9 @@ exports.config = {
          'chromeOptions': {
              'args': [
                  //'incognito',
-                 'disable-extensions', 'start-maximized', 'enable-crash-reporter-for-testing', '--user-data-dir=D:\\Workspace\\User_Data']
+                 'disable-extensions', 'start-maximized', 'enable-crash-reporter-for-testing'
+                 , '--user-data-dir=D:\\Workspace\\User_Data'
+             ]
         },
 
         // Name of the process executing this capability.  Not used directly by
@@ -209,6 +218,7 @@ exports.config = {
         // At this point, global variable 'protractor' object will NOT be set up,
         // and globals from the test framework will NOT be available. The main
         // purpose of this function should be to bring up test dependencies.
+
     },
 
      /**A callback function called once protractor is ready and available, and

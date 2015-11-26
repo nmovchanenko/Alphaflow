@@ -2,6 +2,7 @@ var platforms = require('../resources/platforms.json');
 var userData = require('../resources/users.json');
 var BaseOperations = require('../common/BaseSteps.js');
 var RealEstatePage = require('../pages/RealEstatePage.js');
+var config = require('../settings');
 
 describe('Real Estate - Investment Dashboard', function() {
     var base = new BaseOperations();
@@ -256,7 +257,8 @@ describe('Real Estate - Investment Dashboard', function() {
     });
 
     it('should open Real Estate page', function() {
-        base.openBogdanRealEstate(userData.validEmail, userData.validPass);
+        base.openBogdanRealEstate(config.get('app:login'), config.get('app:password'));
+
         realEstate.filterInvestmentsByPlatform(platforms.fundrise);
 
         readPage().then(map => {
