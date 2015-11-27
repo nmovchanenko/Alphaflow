@@ -6,12 +6,19 @@ var Button    = require('../core/elements/Button.js'),
 
 var Cashflows = function() {
     var btnCategoryList = new Button(by.xpath("//span[@data-field='type']//span[@class='k-icon k-i-arrow-s']"), 'Show categories');
+    var btnInvestmentTypeList = new Button(by.xpath("//span[@data-field='investmentType']//span[@class='k-icon k-i-arrow-s']"), 'Show investment types');
     var tbEarningsLifetimeEquity = new TextBlock(by.xpath("//div[@class='col-lg-4'][3]//h2[@class='font-bold ng-binding']"), "Earnings Lifetime: Real Estate Equity");
 
     this.filterInvestmentsByCategory = function(category) {
         btnCategoryList.click();
-        perform.isVisible(element(by.xpath('//li[contains(text(),\'' + category + '\')]')));
-        element(by.xpath('//li[contains(text(),\'' + category + '\')]')).click();
+        perform.isVisible(element(by.xpath("//li[contains(text(),'" + category + "')]")));
+        element(by.xpath("//li[contains(text(),'" + category + "')]")).click();
+    };
+
+    this.filterInvestmentsByType = function(type) {
+        btnInvestmentTypeList.click();
+        perform.isVisible(element(by.xpath("//li[contains(text(),'" + type + "')]")));
+        element(by.xpath("//li[contains(text(),'" + type + "')]")).click();
     };
 
     this.getEarningsLifetimeEquity = function() {

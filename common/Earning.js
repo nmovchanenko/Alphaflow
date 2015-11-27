@@ -4,7 +4,7 @@ var Earning = function() {
     var earningDate = '';
     var earningAmount = '';
     var earningType = '';
-
+    var earningCategory = '';
 
     this.setName = function(name) {
         earningName = name;
@@ -22,6 +22,10 @@ var Earning = function() {
         earningType = type;
     };
 
+    this.setCategory = function (category) {
+        earningCategory = category;
+    };
+
     this.getName = function() {
         return earningName;
     };
@@ -36,6 +40,10 @@ var Earning = function() {
 
     this.getType = function() {
         return earningType;
+    };
+
+    this.getCategory = function () {
+        return earningCategory;
     };
 };
 

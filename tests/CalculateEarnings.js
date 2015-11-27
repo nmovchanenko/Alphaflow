@@ -14,15 +14,25 @@ describe('Test earning', function () {
 
         // focus on table
         browser.executeScript("document.getElementsByClassName('k-grid-header')[0].scrollIntoView();");
-        cashflowPage.filterInvestmentsByCategory('Dividend');
+        cashflowPage.filterInvestmentsByType('Equity');
 
-        cashFlowTable.getEarnings().then(earnings => {
+        cashFlowTable.getEarnings().then(earningsArray => {
             "use strict";
             var calculatedEarnings = 0;
-            for (var i = 0; i < earnings.length; i++) {
-                calculatedEarnings += earnings[i].getAmount();
+
+            for (var i = 0; i < earningsArray.length; i++) {
+                // if earning's category is 'Principal', skip calculating
+                if(earningsArray[i].getCategory().localeCompare("Principal") == 0) {
+                    logger.debug("Skipped Principal. Its amount was: %s", earningsArray[i].getAmount());
+                } else {
+                    calculatedEarnings += earningsArray[i].getAmount();
+                }
             }
-            expect(cashflowPage.getEarningsLifetimeEquity()).toEqual(Math.round(calculatedEarnings));
+
+            cashflowPage.getEarningsLifetimeEquity().then(lifetimeEquity => {
+                // we need to parse lifetimeEquity as 'calculatedEarnings' is float
+                expect(parseFloat(lifetimeEquity)).toEqual(Math.round(calculatedEarnings));
+            })
         });
 
     });

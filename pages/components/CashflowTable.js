@@ -13,24 +13,24 @@ var CashflowTable = function() {
      * @return {Promise} Array with 'Earning' objects
      */
     this.getEarnings = function() {
-        return readPage().then(function() {
+        return readPages().then(function() {
             "use strict";
             return earningArray;
         });
     };
 
     /**
-     * Read earnings on single page
+     * Read earnings on pages and save them into collection
      * @return {[Promise]} 
      */
-    var readPage = function() {
+    var readPages = function() {
         var grid = element.all(by.xpath("//tbody[@role='rowgroup']/tr"));
 
         return grid.each(function(element, index) {
             var rowNumber = index + 1;
             readRow(rowNumber).then(earning => {
                 "use strict";
-                //map.set(index++, earning);
+                map.set(index++, earning);
                 earningArray.push(earning);
             })
         }).then(function () {
@@ -38,7 +38,7 @@ var CashflowTable = function() {
                 "use strict";
                 if (!isPresent) {
                     btnNextPage.click().then(function () {
-                        readPage();
+                        readPages();
                     });
                 } else {
                     logger.info("Last page reached");
@@ -49,26 +49,27 @@ var CashflowTable = function() {
 
     /**
      * Read a row and create an Earning
-     * @param  {[int]} row number 
-     * @return {[Promise]} Earning object
+     * @param  {[int]} rowNumber number
      */
-    var readRow = function(row) {
+    var readRow = function(rowNumber) {
         // focus on table
         browser.executeScript("document.getElementsByClassName('k-grid-header')[0].scrollIntoView();");
         var earning = new Earning();
 
         // will return a promise with filled earning
-        return readDate(row).then(date => {
+        return readCategory(rowNumber).then(category => {
+            earning.setCategory(category);
+            return readDate(rowNumber);
+        }).then(date => {
             earning.setDate(date);
-            return readAmount(row);
+            return readAmount(rowNumber);
         }).then(amount => {
-            earning.setAmount(parseFloat(amount.replace(/[$,]/g, "")));
-            return readName(row);
+            earning.setAmount(parseAmount(amount));
+            return readName(rowNumber);
         }).then(name => {
             earning.setName(name);
-            return readType(row);
+            return readType(rowNumber);
         }).then(type => {
-            "use strict";
             earning.setType(type);
             return earning;
         })
@@ -76,43 +77,69 @@ var CashflowTable = function() {
 
     /**
      * Read a cell of date
-     * @param  {[int]} row number
+     * @param  {[int]} rowNumber
      * @return {Promise}     String date
      */
-    var readDate = function(row) {
-        var dateCell = new TextBlock(by.xpath("//tbody[@role='rowgroup']/tr[" + row + "]/td[1]"), "'Date' cell");
+    var readDate = function(rowNumber) {
+        var dateCell = new TextBlock(by.xpath("//tbody[@role='rowgroup']/tr[" + rowNumber + "]/td[1]"), "Date");
         return dateCell.getText();
     };
 
     /**
      * Read a cell of amount
-     * @param  {[int]} row number
+     * @param  {[int]} rowNumber
      * @return {Promise}     String amount
      */
-    var readAmount = function(row) {
-        var amountCell = new TextBlock(by.xpath("//tbody[@role='rowgroup']/tr[" + row + "]/td[2]"), "'Amount' cell");
+    var readAmount = function(rowNumber) {
+        var amountCell = new TextBlock(by.xpath("//tbody[@role='rowgroup']/tr[" + rowNumber + "]/td[2]"), "Amount");
         return amountCell.getText();
     };
 
     /**
      * Read a cell of investment name
-     * @param  {[int]} row number
+     * @param  {[int]} rowNumber
      * @return {Promise}     String investment name
      */
-    var readName = function(row) {
-        var nameCell = new TextBlock(by.xpath("//tbody[@role='rowgroup']/tr[" + row + "]/td[3]/span"), "'Investment name' cell");
+    var readName = function(rowNumber) {
+        var nameCell = new TextBlock(by.xpath("//tbody[@role='rowgroup']/tr[" + rowNumber + "]/td[3]/span"), "Investment name");
         return nameCell.getText();
     };
 
     /**
      * Read a cell of investment type
-     * @param  {[int]} row number
+     * @param  {[int]} rowNumber
      * @return {Promise}     String investment type
      */
-    var readType = function(row) {
-        var nameCell = new TextBlock(by.xpath("//tbody[@role='rowgroup']/tr[" + row + "]/td[6]/span"), "'Type' cell");
-        return nameCell.getText();
+    var readType = function(rowNumber) {
+        var typeCell = new TextBlock(by.xpath("//tbody[@role='rowgroup']/tr[" + rowNumber + "]/td[6]/span"), "Type");
+        return typeCell.getText();
     };
+
+    /**
+     * Read a cell of investment category
+     * @param  {[int]} rowNumber
+     * @return {Promise}     String category
+     */
+    var readCategory = function(rowNumber) {
+        var categoryCell = new TextBlock(by.xpath("//tbody[@role='rowgroup']/tr[" + rowNumber + "]/td[7]/span"), "Category");
+        return categoryCell.getText();
+    };
+
+    /**
+     * Will parse the number from the table cell: remove symbols '$', '()' or ','
+     * If the value is enclosed in parentheses (e.g. '($40,000.00)) it will be parsed to negative number
+     * @param displayedValue
+     * @returns {*} Float
+     */
+    var parseAmount = function (displayedValue) {
+        var parsedSymbols;
+        if (displayedValue.startsWith('(')) {
+            parsedSymbols = displayedValue.replace(/[$,()]/g, "");
+            return parseFloat(parsedSymbols) * (-1);
+        }
+        parsedSymbols = displayedValue.replace(/[$,]/g, "");
+        return parseFloat(parsedSymbols);
+    }
 };
 
 module.exports = CashflowTable;
