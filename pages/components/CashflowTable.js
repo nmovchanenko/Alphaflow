@@ -3,7 +3,6 @@ var TextBlock = require('../../core/elements/TextBlock.js'),
     Earning   = require('../../common/Earning.js');
 
 var CashflowTable = function() {
-    var map           = new Map();
     var earningArray  = [];
     var btnDisabledNextPage = element(by.xpath("//ul[@class='k-pager-numbers k-reset']/following-sibling::a[@class='k-link k-pager-nav k-state-disabled']"));
     var btnNextPage      = new Link(by.xpath("//a[@title='Go to the next page']"), "Next Page");
@@ -30,7 +29,6 @@ var CashflowTable = function() {
             var rowNumber = index + 1;
             readRow(rowNumber).then(earning => {
                 "use strict";
-                map.set(index++, earning);
                 earningArray.push(earning);
             })
         }).then(function () {
