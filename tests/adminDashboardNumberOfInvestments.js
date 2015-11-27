@@ -1,7 +1,7 @@
 "use strict";
 
 var co = require('co');
-var mongo = require('./../config/mongo');
+var mongo = require('../core/db/mongoose.js');
 
 co(function *() {
     yield mongo.connect();
@@ -20,6 +20,8 @@ co(function *() {
     });
 
     console.log("Total Number Of Real Estate Investments: ", numberOfTotalInvestments.length);
+
+    process.exit(0);
 })();
 
 

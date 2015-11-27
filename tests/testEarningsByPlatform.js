@@ -1,22 +1,20 @@
 "use strict";
 
 var co = require('co');
-var mongo = require('./../config/mongo');
 var _ = require('lodash');
-var constants = require('../constants/businessLogic.js');
+var constants = require('../constants/businessLogic');
+var mongoose = require('../core/db/mongoose.js');
 
 co(function *() {
-    yield mongo.connect();
 
-    var UserSchema = require('./../models/user.js').model('User');
-    var ContributionSchema = require('./../models/contribution').model('Contribution');
-    var PlatformSchema = require('./../models/platform').model('Platform');
-    var InvestmentSchema = require('./../models/investment').model('Investment');
+    var UserSchema = require('./../core/db/model/UserSchema.js').model('User');
+    var ContributionSchema = require('./../core/db/model/ContributionSchema.js').model('Contribution');
+    var PlatformSchema = require('./../core/db/model/PlatformSchema.js').model('Platform');
 
-    var userId = new mongo.ObjectId('555cb819c6e3ee0300b63876');
+    var userId = new mongoose.Types.ObjectId('5577e03dd5b0510300e5a38e');
     var user = yield UserSchema.findOne({_id: userId});
 
-    var platformIds = user.connectedPlatforms.map(p => new mongo.ObjectId(p.platform));
+    var platformIds = user.connectedPlatforms.map(p => new mongoose.Types.ObjectId(p.platform));
 
     var contributions = yield ContributionSchema.find({
         owner: userId,
@@ -27,14 +25,16 @@ co(function *() {
 
     var realEstate = constants.investmentAssetClassEnum['Real Estate'];
 
+    console.log(realEstate);
+
     var userActiveReContribs = _.filter(contributions, c => c.investment
-        && c.investment.status <= 40 && c.investment.status !== 15
+        && c.investment.status != 70
         && c.investment.assetClass === realEstate);
 
     var earningsByPlatform = _(userActiveReContribs)
         .forEach(function(c) {
             c.earningSum = _(c.earnings)
-                .filter(e => e.type !== 'principal')
+                .filter(e => e.type !== 'Principal')
                 .sum('amount');
         })
         .groupBy(c => c.platform.name)
@@ -50,4 +50,4 @@ co(function *() {
 
 
     process.exit(0);
-});
+})();

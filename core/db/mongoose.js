@@ -1,8 +1,9 @@
 var mongoose = require('mongoose');
 var config = require('../../settings');
 
-var dbURI = config.get('mongoose:uri');
+var dbURI = config.get('mongoose:local');
 
+console.log(dbURI);
 // Create the database connection
 mongoose.connect(dbURI);
 

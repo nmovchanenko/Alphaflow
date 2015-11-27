@@ -41,7 +41,7 @@ exports.config = {
      webdriver.chrome.driver. If null, Selenium will
      attempt to find ChromeDriver using PATH.
     */
-     chromeDriver: null,
+     chromeDriver: './core/resources/selenium/chromedriver',
 
      /**---- 2. To connect to a Selenium Server which is already running ----------
      The address of a running Selenium Server. If specified, Protractor will
@@ -88,9 +88,7 @@ exports.config = {
      Spec patterns are relative to the location of this config.
     */
      specs: [
-         //'tests/ReadFromDBTest.js',
-         'tests/CalculateEarnings.js'
-            //'tests/*.js'
+         'tests/*.js'
     ],
 
     /**
@@ -133,9 +131,9 @@ exports.config = {
              'args': [
                  //'incognito',
                  'disable-extensions', 'start-maximized', 'enable-crash-reporter-for-testing'
-                 //, '--user-data-dir=D:\\Workspace\\User_Data'
-             ]
-        },
+                 //, '--user-data-dir=D:\\Workspace\\User_Data'    
+         ]        
+         },
 
         // Name of the process executing this capability.  Not used directly by
         // protractor or the browser, but instead pass directly to third parties
@@ -218,7 +216,6 @@ exports.config = {
         // At this point, global variable 'protractor' object will NOT be set up,
         // and globals from the test framework will NOT be available. The main
         // purpose of this function should be to bring up test dependencies.
-
     },
 
      /**A callback function called once protractor is ready and available, and
