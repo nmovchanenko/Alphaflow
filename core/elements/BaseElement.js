@@ -31,9 +31,19 @@ BaseElement.prototype.getText = function() {
 
 BaseElement.prototype.isDisplayed = function() {
     var descr = this.elementDescription;
-    return this.webElement.isDisplayed().then(function(result) {
-        logger.info(descr + ': is displayed: ' + result);
-        return result;
+    return this.webElement.isDisplayed().then(function(booleanResult) {
+        booleanResult ? logger.info('%s: is displayed', descr) : logger.info('%s: is not displayed', descr);
+        return booleanResult;
+    }, function(err){
+        throw new CustomError(err.message);
+    })
+};
+
+BaseElement.prototype.isPresent = function () {
+    var descr = this.elementDescription;
+    return this.webElement.isPresent().then(function(booleanResult) {
+        booleanResult ? logger.info('%s: is present', descr) : logger.info('%s: is not present', descr);
+        return booleanResult;
     }, function(err){
         throw new CustomError(err.message);
     })
