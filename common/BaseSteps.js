@@ -19,9 +19,10 @@ var BaseSteps = function() {
         logInPage.txbEmail.typeText(email);
         logInPage.txbPassword.typeText(password);
         logInPage.btnLogin.click();
+        browser.wait(condition.visibilityOf(element(by.id('side-menu'))), 15000);
     };
 
-    /**
+     /**
      * Open Real Estate page (user must be logged in).
      */
     this.openRealEstate = function () {
