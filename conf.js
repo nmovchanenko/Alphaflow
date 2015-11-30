@@ -95,7 +95,6 @@ exports.config = {
      * Patterns to exclude.
     */
     exclude: [
-        'tests/adminDashboardNumberOfInvestments.js',
         'tests/CollectEarningsByPlatform.js',
         'tests/testEarningByType.js',
         'tests/testEarningsByPlatform.js'
@@ -189,7 +188,7 @@ exports.config = {
      A base URL for your application under test. Calls to protractor.get()
      with relative paths will be prepended with this.
     */
-     baseUrl: config.get('app:url'),
+    baseUrl: config.get('env:stage'),
 
      /**CSS Selector for the element housing the angular app - this defaults to
      body, but is necessary if ng-app is on a descendant of <body>.
