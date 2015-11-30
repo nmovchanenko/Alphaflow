@@ -16,16 +16,16 @@ describe('Test earning', function () {
         browser.executeScript("document.getElementsByClassName('k-grid-header')[0].scrollIntoView();");
         cashflowPage.filterInvestmentsByType('Equity');
 
-        cashFlowTable.getEarnings().then(earningsArray => {
+        cashFlowTable.getEarnings().then(earningsCollection => {
             "use strict";
             var calculatedEarnings = 0;
 
-            for (var i = 0; i < earningsArray.length; i++) {
+            for (var earning of earningsCollection.values()) {
                 // if earning's category is 'Principal', skip calculating
-                if(earningsArray[i].getCategory().localeCompare("Principal") == 0) {
-                    logger.debug("Skipped Principal. Its amount was: %s", earningsArray[i].getAmount());
+                if(earning.getCategory().localeCompare("Principal") == 0) {
+                    logger.debug("Skipped Principal. Its amount was: %s", earning.getAmount());
                 } else {
-                    calculatedEarnings += earningsArray[i].getAmount();
+                    calculatedEarnings += earning.getAmount();
                 }
             }
 
