@@ -12,7 +12,7 @@ var CashflowTable = function() {
      * Read earnings from all pages 
      * @return {Promise} Array with 'Earning' objects
      */
-    this.getEarnings = function() {
+    this.getCollection = function() {
         return readPages().then(function() {
             "use strict";
             return earningsMap;
