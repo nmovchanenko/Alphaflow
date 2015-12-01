@@ -11,7 +11,7 @@ describe('Total Investments', function () {
     it('calculate Equity', function () {
 
         co(function * () {
-            step.loginAs(config.get('app:login'), config.get('app:password'));
+            step.loginAs(config.get('testUser2:login'), config.get('testUser2:password'));
             step.openRealEstate();
 
             realEstatePage.filterInvestmentsByType("Equity");

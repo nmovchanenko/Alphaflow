@@ -13,7 +13,7 @@ describe('Real Estate - Investment Dashboard', function() {
     });
 
     it('User name should be displayed ', function() {
-        step.loginAs(config.get('app:login'), config.get('app:password'));
+        step.loginAs(config.get('testUser2:login'), config.get('testUser2:password'));
         expect(sidebar.getProfileName()).toEqual(profiles.evgenijadr);
     });
 

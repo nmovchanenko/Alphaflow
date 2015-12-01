@@ -8,7 +8,7 @@ describe('Test earning', function () {
     var cashFlowTable = new CashflowTable();
 
     it('read earning', function () {
-        step.loginAs(config.get('app:login'), config.get('app:password'));
+        step.loginAs(config.get('testUser2:login'), config.get('testUser2:password'));
 
         step.openCashflows();
 
@@ -16,7 +16,7 @@ describe('Test earning', function () {
         browser.executeScript("document.getElementsByClassName('k-grid-header')[0].scrollIntoView();");
         cashflowPage.filterInvestmentsByType('Equity');
 
-        cashFlowTable.getEarnings().then(earningsCollection => {
+        cashFlowTable.getCollection().then(earningsCollection => {
             "use strict";
             var calculatedEarnings = 0;
 

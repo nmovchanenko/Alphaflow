@@ -1,13 +1,12 @@
 var SignUpPage  = require('../pages/SignUpPage.js'),
     RandomUtils = require('../core/utils/RandomUtils.js'),
-    ErrorMessages = require('../constants/errorMessages.js')
+    ErrorMessages = require('../constants/errorMessages.js');
 
 describe('Incorrect password during sign up check', function(){
     var signUpPage  = new SignUpPage(),
         randomUtils = new RandomUtils();
 
     beforeAll(function () {
-        logger.info('------------ Test started ------------');
         signUpPage.openSignUpPage();
     });
 
