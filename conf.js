@@ -234,6 +234,10 @@ exports.config = {
          global.logger   = Logger.getCustomLogger();
          global.perform  = new Command();
 
+         beforeEach(function() {
+             perform.logStartTest();
+         });
+
          jasmine.getEnv().addReporter(HtmlReporter.getReporter());
     },
 

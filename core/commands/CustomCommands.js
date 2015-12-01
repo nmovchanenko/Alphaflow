@@ -1,6 +1,9 @@
-// TODO: exception handling
 
 var CustomCommands = function() {
+
+    this.logStartTest = function (message) {
+        message ? logger.info(message) : logger.info("----==== Test started ====----");
+    };
 
     this.openPage = function(url) {
         browser.get(url);
