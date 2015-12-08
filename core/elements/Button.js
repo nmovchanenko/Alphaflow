@@ -13,7 +13,7 @@ Button.prototype.click = function() {
     return this.webElement.click().then(function() {
         logger.info("Button '%s' :: click", descr);
     }, function(err){
-        throw new CustomError(err.message);
+        throw new CustomError("Error while click on '%s' button: %s", descr, err.message);
     })
 };
 

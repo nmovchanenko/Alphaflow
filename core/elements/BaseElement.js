@@ -2,11 +2,16 @@ var CustomError = require('../exceptions/CustomError.js');
 
 var BaseElement = function (locator, description) {
     this.webElement         = element(locator);
-    this.elementDescription = 'Web Element';
+    this.elementDescription = description || 'Web Element';
+};
 
-    if(description) {
-        this.elementDescription = description;
-    }
+BaseElement.prototype.click = function() {
+    var descr = this.elementDescription;
+    return this.webElement.click().then(function() {
+        logger.info("'%s' :: click", descr);
+    }, function(err){
+        throw new CustomError("Error while click on " + descr + ": "  + err.message);
+    })
 };
 
 BaseElement.prototype.getAttribute = function(attribute) {
