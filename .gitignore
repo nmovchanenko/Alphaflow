@@ -8,3 +8,5 @@ models/
 config/
 settings/
 /resources/MongoData.json
+allure-results/
+target/

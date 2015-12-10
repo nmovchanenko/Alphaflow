@@ -1,20 +1,19 @@
 var Earning = require('../common/Earning.js'),
     config = require('../settings'),
     CashflowTable = require("../pages/components/CashflowTable.js"),
+    Filter = require("../pages/components/Filter.js"),
     CashflowPage = require("../pages/CashflowsPage.js");
 
 describe('Test earning', function () {
     var cashflowPage = new CashflowPage();
     var cashFlowTable = new CashflowTable();
+    var filter = new Filter();
 
     it('read earning', function () {
         step.loginAs(config.get('testUser2:login'), config.get('testUser2:password'));
-
         step.openCashflows();
 
-        // focus on table
-        browser.executeScript("document.getElementsByClassName('k-grid-header')[0].scrollIntoView();");
-        cashflowPage.filterInvestmentsByType('Equity');
+        filter.filterByType('Equity');
 
         cashFlowTable.getCollection().then(earningsCollection => {
             "use strict";

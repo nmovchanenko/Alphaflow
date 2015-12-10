@@ -24,7 +24,9 @@ var CashflowTable = function() {
      * @return {[Promise]} 
      */
     var readPages = function() {
-        var grid = element.all(by.xpath("//tbody[@role='rowgroup']/tr"));
+        // focus on table
+        browser.executeScript("document.getElementsByClassName('af-kendo-grid k-grid k-widget')[1].scrollIntoView();");
+        var grid = element.all(by.xpath("//div[@class='af-kendo-grid k-grid k-widget']//tbody[@role='rowgroup']/tr"));
 
         return grid.each(function(element, index) {
             var rowNumber = index + 1;
@@ -51,8 +53,6 @@ var CashflowTable = function() {
      * @param  {[int]} rowNumber number
      */
     var readRow = function(rowNumber) {
-        // focus on table
-        browser.executeScript("document.getElementsByClassName('k-grid-header')[0].scrollIntoView();");
         var earning = new Earning();
 
         // will return a promise with filled earning
@@ -80,7 +80,7 @@ var CashflowTable = function() {
      * @return {Promise}     String date
      */
     var readDate = function(rowNumber) {
-        var dateCell = new TextBlock(by.xpath("//tbody[@role='rowgroup']/tr[" + rowNumber + "]/td[1]"), "Date");
+        var dateCell = new TextBlock(by.xpath("//tbody[@role='rowgroup']/tr[" + rowNumber + "]/td[1]/div"), "Date");
         return dateCell.getText();
     };
 
@@ -90,7 +90,7 @@ var CashflowTable = function() {
      * @return {Promise}     String amount
      */
     var readAmount = function(rowNumber) {
-        var amountCell = new TextBlock(by.xpath("//tbody[@role='rowgroup']/tr[" + rowNumber + "]/td[2]"), "Amount");
+        var amountCell = new TextBlock(by.xpath("//div[@class='af-kendo-grid k-grid k-widget']//tbody[@role='rowgroup']/tr[" + rowNumber + "]/td[2]"), "Amount");
         return amountCell.getText();
     };
 
@@ -100,7 +100,7 @@ var CashflowTable = function() {
      * @return {Promise}     String investment name
      */
     var readName = function(rowNumber) {
-        var nameCell = new TextBlock(by.xpath("//tbody[@role='rowgroup']/tr[" + rowNumber + "]/td[3]/span"), "Investment name");
+        var nameCell = new TextBlock(by.xpath("//tbody[@role='rowgroup']/tr[" + rowNumber + "]//span[@ng-bind='dataItem.investmentName']"), "Investment name");
         return nameCell.getText();
     };
 
@@ -110,7 +110,7 @@ var CashflowTable = function() {
      * @return {Promise}     String investment type
      */
     var readType = function(rowNumber) {
-        var typeCell = new TextBlock(by.xpath("//tbody[@role='rowgroup']/tr[" + rowNumber + "]/td[6]/span"), "Type");
+        var typeCell = new TextBlock(by.xpath("//tbody[@role='rowgroup']/tr[" + rowNumber + "]//span[@ng-bind='dataItem.type']"), "Type");
         return typeCell.getText();
     };
 
@@ -120,7 +120,7 @@ var CashflowTable = function() {
      * @return {Promise}     String category
      */
     var readCategory = function(rowNumber) {
-        var categoryCell = new TextBlock(by.xpath("//tbody[@role='rowgroup']/tr[" + rowNumber + "]/td[7]/span"), "Category");
+        var categoryCell = new TextBlock(by.xpath("//tbody[@role='rowgroup']/tr[" + rowNumber + "]//span[@ng-bind='dataItem.category']"), "Category");
         return categoryCell.getText();
     };
 

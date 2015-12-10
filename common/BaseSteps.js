@@ -19,7 +19,7 @@ var BaseSteps = function() {
         logInPage.txbEmail.typeText(email);
         logInPage.txbPassword.typeText(password);
         logInPage.btnLogin.click();
-        browser.wait(condition.visibilityOf(element(by.id('side-menu'))), 15000);
+        //browser.wait(condition.visibilityOf(element(by.id('side-menu'))), 15000);
     };
 
      /**
@@ -42,7 +42,7 @@ var BaseSteps = function() {
     this.openCashflows = function () {
         sidebar.lnkCashflows.click();
         // this will wait Cashflows page to be loaded
-        browser.wait(condition.visibilityOf(element(by.xpath('//h2[contains(text(),\'Real Estate - Cashflows\')]'))), 15000);
+        //browser.wait(condition.visibilityOf(element(by.xpath('//h2[contains(text(),\'Real Estate - Cashflows\')]'))), 15000);
     };
 
     /**

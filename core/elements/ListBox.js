@@ -33,21 +33,11 @@ ListBox.prototype.selectByPartialText = function(text) {
 };
 
 ListBox.prototype.selectByText = function(text) {
-    var descr = this.elementDescription;
-    this.webElement.click().then(function() {
-        element(by.xpath("//li[text()='" + text + "']")).click().then(function() {
-            logger.info("ListBox %s':: select '%s'", descr, text);
-        }, function(err){
-            throw new CustomError("Error while select '" + text + "' from '" + descr + "' ListBox: " + err.message);
-        })
-    });
-};
-
-ListBox.prototype.manualSelect = function (option) {
-    browser.sleep(3000);
-    element(by.xpath("//li[text()='Debt']")).click().then(function() {
-        logger.debug("//li[text()='Debt']  clicked");
-    });
+    browser.executeScript("document.evaluate(\"//li[text()='" + text + "']\"," +
+        " document.documentElement," +
+        " null," +
+        " XPathResult.ORDERED_NODE_SNAPSHOT_TYPE," +
+        " null).snapshotItem(0).click();");
 };
 
 module.exports = ListBox;
