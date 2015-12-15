@@ -18,7 +18,7 @@ var Filter = function() {
         // focus on table filters
         browser.executeScript("document.getElementsByClassName('row external-filter-wrapper')[0].scrollIntoView();");
 
-        // TODO: get rid of waiters
+        // TODO: get rid of waiter
         var EC = protractor.ExpectedConditions;
         browser.wait(EC.visibilityOf($(".row.external-filter-wrapper")), 5000);
 

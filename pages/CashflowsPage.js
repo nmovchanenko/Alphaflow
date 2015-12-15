@@ -5,7 +5,6 @@ var Button    = require('../core/elements/Button.js'),
 	Earning   = require('../common/Earning.js');
 
 var Cashflows = function() {
-    //TODO: make this locator unique to avoid the warning 'more than one element found for locator'
     var tbEarningsLifetimeEquity = new TextBlock(by.xpath("//div[@k-data-source='cashFlowsTotalsDataSource']//tbody//tr[2]//td[4]//h5"), "Earnings Lifetime: Real Estate Equity");
 
     this.getEarningsLifetimeEquity = function() {

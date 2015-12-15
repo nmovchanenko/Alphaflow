@@ -1,6 +1,6 @@
 var Earning = require('../common/Earning.js'),
     config = require('../settings'),
-    CashflowTable = require("../pages/components/CashflowTable.js"),
+    CashflowTable = require("../pages/tables/CashflowTable.js"),
     Filter = require("../pages/components/Filter.js"),
     CashflowPage = require("../pages/CashflowsPage.js");
 
@@ -15,7 +15,7 @@ describe('Test earning', function () {
 
         filter.filterByType('Equity');
 
-        cashFlowTable.getCollection().then(earningsCollection => {
+        cashFlowTable.readTable().then(earningsCollection => {
             "use strict";
             var calculatedEarnings = 0;
 

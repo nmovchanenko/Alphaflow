@@ -26,14 +26,9 @@ var BaseSteps = function() {
      * Open Real Estate page (user must be logged in).
      */
     this.openRealEstate = function () {
-        if (!sidebar.lnkRealEstate.isDisplayed()) {
-            sidebar.lnkRealEstate.click();
-        } else {
-            sidebar.lnkDashboardMenu.click();
-            sidebar.lnkRealEstate.click();
-        }
+        sidebar.lnkRealEstate.click();
         // this will wait Real Estate page to be loaded
-        browser.wait(condition.visibilityOf(element(by.xpath('//h2[contains(text(),\'Real Estate - Investment Dashboard\')]'))), 15000);
+        //browser.wait(condition.visibilityOf(element(by.xpath('//h2[contains(text(),\'Real Estate - Investment Dashboard\')]'))), 15000);
     };
 
     /**

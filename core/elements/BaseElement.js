@@ -20,7 +20,7 @@ BaseElement.prototype.getAttribute = function(attribute) {
         logger.info(descr + ': got the attribute \'' + attribute + '\' is: ' + result);
         return result;
     }, function(err){
-        throw new CustomError(err.message);
+        throw new CustomError("Error while get attribute of '" + descr + "': "  + err.message);
     });
 };
 
@@ -30,7 +30,7 @@ BaseElement.prototype.getText = function() {
         logger.info(descr + ': got the text: ' + result);
         return result;
     }, function(err){
-        throw new CustomError(err.message);
+        throw new CustomError("Error while get text of '" + descr + "': "  + err.message);
     })
 };
 
