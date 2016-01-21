@@ -1,11 +1,12 @@
 var TextBlock = require('../../core/elements/TextBlock.js'),
     Link      = require('../../core/elements/Link.js'),
+    Button    = require('../../core/elements/Button.js'),
     Earning   = require('../../common/Earning.js');
 
 var CashflowTable = function() {
     var keyCount            = 0;
     var earningsMap         = new Map();
-    var btnDisabledNextPage = element(by.xpath("//ul[@class='k-pager-numbers k-reset']/following-sibling::a[@class='k-link k-pager-nav k-state-disabled']"));
+    var btnDisabledNextPage = new Button(by.xpath("//ul[@class='k-pager-numbers k-reset']/following-sibling::a[@class='k-link k-pager-nav k-state-disabled']"), "Disabled 'Go to the next page'");
     var btnNextPage         = new Link(by.xpath("//a[@title='Go to the next page']"), "Next Page");
 
     /**

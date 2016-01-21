@@ -1,16 +1,11 @@
-var userData        = require('../resources/users.json'),
-    profiles        = require('../resources/profiles.json'),
+var profiles        = require('../resources/profiles.json'),
     Sidebar         = require('../pages/components/Sidebar.js'),
-    RealEstatePage  = require('../pages/RealEstatePage.js');
-var config = require('../settings');
+    RealEstatePage  = require('../pages/RealEstatePage.js'),
+    config          = require('../settings');
 
 describe('Real Estate - Investment Dashboard', function() {
     var sidebar     = new Sidebar(),
         realEstate  = new RealEstatePage();
-
-    beforeAll(function () {
-        logger.info('------------ Test started ------------');
-    });
 
     it('User name should be displayed ', function() {
         step.loginAs(config.get('testUser2:login'), config.get('testUser2:password'));
@@ -19,6 +14,6 @@ describe('Real Estate - Investment Dashboard', function() {
 
     it('should open Real Estate page', function() {
         step.openRealEstate();
-        expect(realEstate.getRealEstatePageHeader()).toEqual('Real Estate - Investment Dashboard');
+        expect(realEstate.getRealEstatePageHeader()).toEqual('Active Real Estate Investments');
     });
 });

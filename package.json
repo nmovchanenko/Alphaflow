@@ -1,12 +1,8 @@
 {
-  "name": "Alphaflow",
+  "name": "node.js protractor tests",
   "version": "",
   "author": "",
-  "elementDescription": "Alphaflow - e2e testing with protractor",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/nmovchanenko/Alphaflow.git"
-  },
+  "elementDescription": "e2e testing with protractor",
   "dependencies": {
     "bluebird": "3.0.1",
     "co": "^3.1.0",

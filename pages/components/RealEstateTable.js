@@ -25,7 +25,8 @@ var RealEstateTable = function() {
      * @return {[Promise]}
      */
     var readPages = function() {
-        var grid = element.all(by.xpath("//tbody[@role='rowgroup']/tr"));
+        browser.executeScript("document.getElementsByClassName('af-kendo-grid k-grid k-widget')[0].scrollIntoView();");
+        var grid = element.all(by.xpath("//div[@class='af-kendo-grid k-grid k-widget']//tbody[@role='rowgroup']/tr"));
 
         return grid.each(function(element, index) {
             var rowNumber = index + 1;
@@ -52,8 +53,6 @@ var RealEstateTable = function() {
      * @param  {[int]} rowNumber number
      */
     var readRow = function(rowNumber) {
-        // focus on table
-        browser.executeScript("document.getElementsByClassName('k-grid-header')[0].scrollIntoView();");
         var investment = new Investment();
 
         // will return a promise with filled earning
@@ -72,7 +71,7 @@ var RealEstateTable = function() {
      * @return {Promise}     String amount
      */
     var readAmount = function(rowNumber) {
-        var amountCell = new TextBlock(by.xpath("//tbody[@role='rowgroup']/tr[" + rowNumber + "]/td[4]//div[@class='text-center ng-binding']"), "Amount");
+        var amountCell = new TextBlock(by.xpath("//tbody[@role='rowgroup']/tr[" + rowNumber + "]/td[5]//div[@class='text-left ng-binding']"), "Amount");
         return amountCell.getText();
     };
 
@@ -82,7 +81,7 @@ var RealEstateTable = function() {
      * @return {Promise}     String investment name
      */
     var readName = function(rowNumber) {
-        var nameCell = new TextBlock(by.xpath("//tbody[@role='rowgroup']/tr[" + rowNumber + "]/td[2]//a"), "Investment name");
+        var nameCell = new TextBlock(by.xpath("//tbody[@role='rowgroup']/tr[" + rowNumber + "]/td[3]//a"), "Investment name");
         return nameCell.getText();
     };
 

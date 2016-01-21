@@ -22,7 +22,7 @@ exports.config = {
      Server is found, this will default to
      node_modules/protractor/selenium/selenium-server...
     */
-     seleniumServerJar: null ,
+     seleniumServerJar: './core/resources/selenium/selenium-server-standalone-2.48.2.jar',
 
      /**The port to start the Selenium Server on, or null if the server should
      find its own unused port. Ignored if seleniumServerJar is null.
@@ -88,7 +88,7 @@ exports.config = {
      Spec patterns are relative to the location of this config.
     */
      specs: [
-         'tests/*.js'
+         'tests/Total_Investments_Equity.js'
     ],
 
     /**
@@ -130,7 +130,7 @@ exports.config = {
              'args': [
                  //'incognito',
                  'disable-extensions', 'start-maximized', 'enable-crash-reporter-for-testing'
-                 //, '--user-data-dir=D:\\Workspace\\User_Data'    
+                 , '--user-data-dir=D:\\Workspace\\User_Data'
          ]        
          },
 
@@ -233,7 +233,7 @@ exports.config = {
          global.step     = new BaseSteps();
          global.logger   = Logger.getCustomLogger();
          global.perform  = new Command();
-
+         beforeAll();
          beforeEach(function() {
              perform.logStartTest();
          });

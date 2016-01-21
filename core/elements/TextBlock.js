@@ -17,7 +17,7 @@ BaseElement.prototype.getText = function() {
         logger.info("TextBlock %s :: get text: %s", descr, result);
         return result;
     }, function(err){
-        throw new CustomError(err.message);
+        throw new CustomError("Error while get text of '" + descr + "': "  + err.message);
     })
 };
 

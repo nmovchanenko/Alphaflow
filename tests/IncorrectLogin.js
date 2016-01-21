@@ -3,10 +3,6 @@ var LogInPage   = require('../pages/LogInPage.js'),
 
 describe('Login page', function() {
 
-    beforeAll(function () {
-        logger.info('------------ Test started ------------');
-    });
-
     it('should display validation message', function() {
         var logInPage = new LogInPage();
 

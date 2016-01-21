@@ -25,15 +25,6 @@ var BaseQueries = function () {
             return numberOfTotalInvestments;
         });
     };
-
-
-
 };
 
 module.exports = BaseQueries;
-
-
-
-
-
-

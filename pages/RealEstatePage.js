@@ -4,7 +4,7 @@ var BaseSteps = require('../common/BaseSteps.js'),
     Link      = require('../core/elements/Link.js');
 
 var RealEstatePage = function() {
-    var realEstatePageHeader     = new TextBlock(by.xpath('//h2').first, 'Real Estate Header');
+    var realEstatePageHeader     = new TextBlock(by.xpath('//h5'), 'Real Estate Header');
     var btnPlatformList          = new Button(by.xpath("//span[@data-field='platformName']//div"), 'Show Platforms');
     var btnTypeList              = new Button(by.xpath("//span[@data-field='investment.type']//div"), 'Show Types');
     var tbTotalInvestmentsEquity = new TextBlock(by.xpath("//div[@class='col-xs-4'][1]//div[@class='font-bold text-primary totals-amount']/small"), "Total Investments - Equity");
